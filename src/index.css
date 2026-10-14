@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light;
+  --paper: #f3f0e8;
+  --paper-2: #fbfaf6;
+  --ink: #142033;
+  --muted: #3e4e60;
+  --line: rgba(20, 32, 51, 0.14);
+  --accent: #1a4578;
+  --accent-ink: #f8f5ef;
+  --brass: #6d522c;
+  --card: rgba(251, 250, 246, 0.92);
+  --danger: #8d2b2b;
+  --band: #0d2138;
+  --band-ink: #f3f0e8;
+  --band-muted: #c5d0dc;
+  --band-button: #f3f0e8;
+  --band-button-ink: #0d2138;
+  /* Adjust these greens to the approved Robes logo once the files are added. */
+  --robes: #0e4e2c;
+  --robes-fill: #1b7a45;
+  --robes-ink: #f4faf6;
+  --shadow: 0 24px 60px rgba(16, 32, 51, 0.08);
+}
+
+.dark {
+  color-scheme: dark;
+  --paper: #08111a;
+  --paper-2: #0e1926;
+  --ink: #e7eef6;
+  --muted: #b4c2d2;
+  --line: rgba(231, 238, 246, 0.14);
+  --accent: #9ec4f0;
+  --accent-ink: #071018;
+  --brass: #e4c79a;
+  --card: rgba(14, 25, 38, 0.92);
+  --danger: #ffb4ae;
+  --band: #10263c;
+  --band-ink: #f3f0e8;
+  --band-muted: #c5d0dc;
+  --band-button: #f3f0e8;
+  --band-button-ink: #0d2138;
+  --robes: #b7e4c4;
+  --robes-fill: #1b7a45;
+  --robes-ink: #f4faf6;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+@theme inline {
+  --font-sans: "Outfit", "Segoe UI", sans-serif;
+  --font-serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-brass: var(--brass);
+  --color-card: var(--card);
+  --color-danger: var(--danger);
+  --color-band: var(--band);
+  --color-band-ink: var(--band-ink);
+  --color-band-muted: var(--band-muted);
+  --color-band-button: var(--band-button);
+  --color-band-button-ink: var(--band-button-ink);
+  --color-robes: var(--robes);
+  --color-robes-fill: var(--robes-fill);
+  --color-robes-ink: var(--robes-ink);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 24%, white);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 80;
+  background: var(--band);
+  color: var(--band-ink);
+  padding: 0.65rem 1rem;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.field {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  color: var(--ink);
+  border-radius: 3px;
+  padding: 0.8rem 0.9rem;
+  font: inherit;
+}
+
+.field:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.panel-shadow {
+  box-shadow: var(--shadow);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.8s ease both;
+}
+
+.rise-delay {
+  animation-delay: 0.12s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
