@@ -161,6 +161,12 @@ body {
   animation-delay: 0.12s;
 }
 
+@media print {
+  .cr-no-print {
+    display: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

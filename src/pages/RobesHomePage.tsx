@@ -58,6 +58,15 @@ export function RobesHomePage() {
             <Link to="/robes/solutions" className={`${robesLink} mt-6 inline-flex`}>
               Explore Our Solutions
             </Link>
+            <Link to="/robes/solutions/clearrequest" className={`${robesLink} mt-3 inline-flex`}>
+              Try the material requisition demo
+            </Link>
+            <Link to="/robes/solutions/waynote" className={`${robesLink} mt-3 inline-flex`}>
+              Try the loading note demo
+            </Link>
+            <Link to="/robes/solutions/spendgate" className={`${robesLink} mt-3 inline-flex`}>
+              Try the expense approval demo
+            </Link>
           </article>
           <article className="border border-line p-6 sm:p-8">
             <p className="text-xs font-medium tracking-[0.16em] text-robes uppercase">Pillar 2</p>

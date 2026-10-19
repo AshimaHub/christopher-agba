@@ -24,6 +24,28 @@ function initialService(requested: string | null, choices: Choice[]) {
   return choices.some((choice) => choice.id === requested) ? requested : ''
 }
 
+function initialChallenge(service: string | null, intent: string | null) {
+  if (service === 'clearrequest' && intent === 'similar') {
+    return 'I would like a material-request and approval solution similar to the ClearRequest demonstration, adapted to our operation.'
+  }
+  if (service === 'clearrequest' && intent === 'workflow') {
+    return 'I would like to discuss a business workflow. The ClearRequest demonstration is close to the visibility we need.'
+  }
+  if (service === 'waynote' && intent === 'similar') {
+    return 'I would like a loading-note solution similar to the Waynote demonstration, adapted to our operation.'
+  }
+  if (service === 'waynote' && intent === 'workflow') {
+    return 'I would like to discuss a business workflow. The Waynote demonstration is close to the loading-note visibility we need.'
+  }
+  if (service === 'spendgate' && intent === 'similar') {
+    return 'I would like an expense-sheet solution similar to the SpendGate demonstration, adapted to our operation.'
+  }
+  if (service === 'spendgate' && intent === 'workflow') {
+    return 'I would like to discuss a business workflow. The SpendGate demonstration is close to the expense approval we need.'
+  }
+  return ''
+}
+
 function validate(values: FormState): Errors {
   const errors: Errors = {}
   if (values.name.trim().length < 2) errors.name = 'Enter your full name.'
@@ -72,7 +94,7 @@ export function ContactForm({
     organization: '',
     email: '',
     service: initialService(params.get('service'), choices),
-    challenge: '',
+    challenge: initialChallenge(params.get('service'), params.get('intent')),
     budget: '',
     companyWebsite: '',
   })

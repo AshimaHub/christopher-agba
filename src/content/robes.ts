@@ -160,6 +160,9 @@ export const robes = {
 
 export function robesServiceChoices() {
   return [
+    { id: 'clearrequest', title: 'A solution similar to the ClearRequest demonstration' },
+    { id: 'waynote', title: 'A solution similar to the Waynote demonstration' },
+    { id: 'spendgate', title: 'A solution similar to the SpendGate demonstration' },
     ...robes.solutions.map((item) => ({ id: item.id, title: item.title })),
     { id: 'not-sure', title: 'Not sure yet — help us define the challenge' },
   ]

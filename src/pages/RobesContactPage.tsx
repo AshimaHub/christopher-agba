@@ -25,7 +25,7 @@ export function RobesContactPage() {
       </PageIntro>
       <Container className="grid gap-12 py-16 md:py-20 lg:grid-cols-[1.2fr_0.8fr]">
         <ContactForm
-          key={params.get('service') ?? 'robes'}
+          key={`${params.get('service') ?? 'robes'}-${params.get('intent') ?? ''}`}
           pathway="robes"
           choices={robesServiceChoices()}
         />
