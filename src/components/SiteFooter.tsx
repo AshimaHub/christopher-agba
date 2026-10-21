@@ -13,7 +13,9 @@ export function SiteFooter() {
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-3">
         <div>
           <Portrait alt="" className="mb-4 h-16 w-16 rounded-full border border-white/15" />
-          <p className="font-serif text-3xl">{site.name}</p>
+          <Link to="/about" className="font-serif text-3xl hover:underline">
+            {site.name}
+          </Link>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-band-muted">{site.role}</p>
           <ul className="mt-4 space-y-2">
             {navigation.map((item) => (
@@ -26,7 +28,7 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <RobesLogo surface="dark" className="h-12 w-auto max-w-[12rem] object-contain object-left" />
+          <RobesLogo surface="dark" className="h-16 w-auto max-w-[5rem] object-contain object-left" />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-band-muted">{robes.proposition}</p>
           <ul className="mt-4 space-y-2">
             {robes.navigation.map((item) => (

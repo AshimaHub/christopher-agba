@@ -1,8 +1,6 @@
-import { useState } from 'react'
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { ThemeToggle } from '../components/ThemeToggle.tsx'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { DemoShell } from '../components/DemoShell.tsx'
 import { Seo } from '../components/Seo.tsx'
-import { SampleBusiness } from '../components/SampleBusiness.tsx'
 import { demoCompany } from '../content/demoCompanies.ts'
 import { actors, countStatus, type Role } from './model.ts'
 import { ClearRequestProvider } from './store.tsx'
@@ -28,114 +26,47 @@ export function ClearRequestDemo() {
 function DemoFrame() {
   const { state, setRole, setCompany, reset, markNoticesRead } = useClearRequest()
   const business = demoCompany(state.companyId)
-  const [open, setOpen] = useState(false)
-  const [noticesOpen, setNoticesOpen] = useState(false)
-  const unread = state.notices.filter((notice) => !notice.read).length
   const pending = countStatus(state.requests, 'pending')
   const issuing = countStatus(state.requests, 'approved') + countStatus(state.requests, 'partial')
+  const actor = actors[state.role]
 
   return (
-    <div className="min-h-svh bg-paper text-ink">
+    <>
       <Seo
         title="Try the material requisition demo · ClearRequest"
         description="Submit a material request, approve it, and issue it from the store. Then ask Robes to build this workflow for your business."
         path="/robes/demo/clearrequest"
       />
-      <div className="flex min-h-svh">
-        <aside className={`cr-no-print ${open ? 'translate-x-0' : '-translate-x-full'} fixed inset-y-0 left-0 z-30 w-72 border-r border-line bg-paper-2 p-5 transition md:static md:translate-x-0`}>
-          <p className="text-xs font-medium tracking-[0.16em] text-robes uppercase">Robes demonstration</p>
-          <p className="mt-2 font-serif text-3xl text-ink">ClearRequest</p>
-          <p className="mt-2 text-sm text-muted">{business.name}</p>
-          <p className="text-sm text-muted">{business.trade}. One of four sample businesses.</p>
-          <nav className="mt-8 grid gap-1" aria-label="ClearRequest">
-            {links.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end={link.end}
-                onClick={() => setOpen(false)}
-                className={({ isActive }) =>
-                  `flex min-h-11 items-center justify-between px-3 text-sm ${isActive ? 'bg-robes-fill text-robes-ink' : 'text-ink hover:bg-paper'}`
-                }
-              >
-                <span>{link.label}</span>
-                {link.label === 'Approvals' && pending > 0 ? <span>{pending}</span> : null}
-                {link.label === 'Issuing' && issuing > 0 ? <span>{issuing}</span> : null}
-              </NavLink>
-            ))}
-          </nav>
-          <Link to="/robes/solutions/clearrequest" className="mt-8 inline-flex text-sm text-robes underline underline-offset-4">
-            Back to the showcase
-          </Link>
-        </aside>
-        {open ? <button type="button" className="cr-no-print fixed inset-0 z-20 bg-band/40 md:hidden" aria-label="Close menu" onClick={() => setOpen(false)} /> : null}
-        <div className="flex min-w-0 flex-1 flex-col">
-          <header className="cr-no-print flex flex-wrap items-center gap-3 border-b border-line px-4 py-3 sm:px-6">
-            <button type="button" className="min-h-11 border border-line px-3 text-sm md:hidden" onClick={() => setOpen(true)}>
-              Menu
-            </button>
-            <RoleSwitcher role={state.role} onChange={setRole} />
-            <SampleBusiness value={state.companyId} onChange={setCompany} />
-            <div className="ml-auto flex items-center gap-1">
-              <button
-                type="button"
-                className="relative min-h-11 px-3 text-sm"
-                aria-expanded={noticesOpen}
-                onClick={() => {
-                  setNoticesOpen((current) => !current)
-                  markNoticesRead()
-                }}
-              >
-                Notices{unread > 0 ? ` (${unread})` : ''}
-              </button>
-              <ThemeToggle />
-              <button
-                type="button"
-                className="min-h-11 px-3 text-sm"
-                onClick={() => {
-                  if (window.confirm('Reset the demonstration to the original sample records?')) reset()
-                }}
-              >
-                Reset demo
-              </button>
-            </div>
-          </header>
-          {noticesOpen ? (
-            <div className="cr-no-print border-b border-line bg-card px-4 py-3 sm:px-6">
-              <ul className="space-y-2 text-sm">
-                {state.notices.slice(0, 6).map((notice) => (
-                  <li key={notice.id}>{notice.text}</li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-          <div className="px-4 py-6 sm:px-6">
-            <Guide />
-            <Outlet key={state.companyId} />
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function RoleSwitcher({ role, onChange }: { role: Role; onChange: (role: Role) => void }) {
-  const roles: Role[] = ['requester', 'approver', 'storekeeper']
-  return (
-    <fieldset className="min-w-0">
-      <legend className="text-xs text-muted">Demo role, not a login</legend>
-      <div className="mt-1 flex flex-wrap gap-1">
-        {roles.map((item) => (
-          <label key={item} className={`inline-flex min-h-11 cursor-pointer items-center px-3 text-sm ${role === item ? 'bg-ink text-paper' : 'border border-line'}`}>
-            <input className="sr-only" type="radio" name="demo-role" checked={role === item} onChange={() => onChange(item)} />
-            {item === 'requester' ? 'Requester' : item === 'approver' ? 'Approver' : 'Storekeeper'}
-          </label>
-        ))}
-      </div>
-      <p className="mt-1 text-xs text-muted">
-        Acting as {actors[role].name}, {actors[role].title}
-      </p>
-    </fieldset>
+      <DemoShell
+        appName="ClearRequest"
+        mark="Rq"
+        navLabel="ClearRequest"
+        businessName={business.name}
+        businessLine={`${business.trade}. Sample business.`}
+        backTo="/robes/solutions/clearrequest"
+        links={links.map((link) => ({
+          ...link,
+          count: link.label === 'Approvals' ? pending : link.label === 'Issuing' ? issuing : undefined,
+        }))}
+        roleId={state.role}
+        roles={[
+          { id: 'requester', label: 'Requester' },
+          { id: 'approver', label: 'Approver' },
+          { id: 'storekeeper', label: 'Storekeeper' },
+        ]}
+        actorName={actor.name}
+        actorTitle={actor.title}
+        onRole={(id) => setRole(id as Role)}
+        companyId={state.companyId}
+        onCompany={setCompany}
+        notices={state.notices}
+        onMarkNoticesRead={markNoticesRead}
+        onReset={reset}
+        guide={<Guide />}
+      >
+        <Outlet key={state.companyId} />
+      </DemoShell>
+    </>
   )
 }
 
@@ -168,9 +99,9 @@ function Guide() {
   }
 
   return (
-    <section className="cr-no-print mb-6 border border-line border-l-4 border-l-robes-fill bg-card p-4">
+    <section className="cr-no-print rounded-2xl border border-[#cfe3d6] bg-white/85 p-4 shadow-sm dark:border-white/10 dark:bg-white/6">
       <p className="text-xs font-medium tracking-[0.14em] text-robes uppercase">Guided demonstration</p>
-      <h2 className="mt-2 font-serif text-2xl text-ink">{title}</h2>
+      <h2 className="mt-1 text-lg font-semibold text-ink">{title}</h2>
       <p className="mt-2 max-w-3xl text-sm text-muted">{text}</p>
       <div className="mt-4 flex flex-wrap gap-3">
         {step === 1 ? (

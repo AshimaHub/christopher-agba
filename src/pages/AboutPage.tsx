@@ -15,8 +15,11 @@ export function AboutPage() {
         description="Christopher Agba is an enterprise software engineer and business systems consultant based in Abuja, Nigeria."
         path="/about"
       />
-      <PageIntro eyebrow="About" title="Technology, applied to how a business actually runs.">
-        <p>{site.about.lead}</p>
+      <PageIntro eyebrow="Christopher Agba" title="The person behind the systems.">
+        <p>
+          Enterprise software engineer, based in Abuja. Background, expertise, and the professional
+          record live on this page.
+        </p>
       </PageIntro>
       <Container className="grid gap-12 py-16 md:grid-cols-[0.85fr_1.15fr] md:py-20">
         <figure>

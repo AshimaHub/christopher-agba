@@ -67,7 +67,7 @@ function RobesLogoImage({
   }
 
   return (
-    <span className={`${onDark ? 'inline-flex rounded-md bg-white p-1.5' : 'inline-flex'} ${className}`}>
+    <span className={`inline-flex ${className}`}>
       <img
         src={src}
         alt="Robes Leadership | Technology"

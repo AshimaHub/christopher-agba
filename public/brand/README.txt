@@ -1,19 +1,12 @@
-The approved green Robes lockup is already in this folder:
+The approved Robes lockup used on the business pages:
 
 robes-logo-green.jpg
-  Green circular swoosh, the word Robes, and Leadership | Technology.
-  This is the logo used across the business pages.
+  The supplied lockup. Kept as the source file.
 
-Optional later files, if you have transparent versions:
+robes-logo.png
+  The same lockup with the white field removed, for light surfaces.
 
-robes-logo-black.png
-  Black variation on a transparent background.
+robes-logo-ondark.png
+  The same swoosh. The wordmark is lightened only so it can be read on a dark surface without a box behind it.
 
-robes-logo-white.png
-  White variation on a transparent background, for dark areas.
-
-robes-mark.png
-  Compact symbol only, without the wordmark.
-
-Until those optional files are added, the site uses the green lockup.
-It does not redraw or recolor the logo.
+The site does not redraw the swoosh.

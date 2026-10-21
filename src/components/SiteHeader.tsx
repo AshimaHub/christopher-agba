@@ -10,11 +10,15 @@ import { ThemeToggle } from './ThemeToggle.tsx'
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
+  const onHome = pathname === '/'
   const inRobes = pathname.startsWith('/robes')
-  const links = inRobes ? robes.navigation : navigation
-  const cta = inRobes
-    ? { to: '/robes/contact', label: 'Request a Consultation', className: robesLook }
-    : { to: '/contact', label: 'Contact Christopher', className: primaryLook }
+  const businessChrome = onHome || inRobes
+  const links = businessChrome ? robes.navigation : navigation
+  const cta = onHome
+    ? { to: '/robes/solutions', label: 'Try a live demo', className: robesLook }
+    : inRobes
+      ? { to: '/robes/contact', label: 'Request a Consultation', className: robesLook }
+      : { to: '/contact', label: 'Contact Christopher', className: primaryLook }
 
   useEffect(() => {
     if (!open) return
@@ -42,7 +46,7 @@ export function SiteHeader() {
   }, [])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-white/25 bg-paper/55 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-paper/45 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
       <div className="border-b border-line">
         <nav
           aria-label="Identity"
@@ -51,7 +55,7 @@ export function SiteHeader() {
           <IdentityLink to="/" current={pathname === '/'}>
             Home
           </IdentityLink>
-          <IdentityLink to="/about" current={!inRobes && pathname !== '/'}>
+          <IdentityLink to="/about" current={pathname.startsWith('/about')}>
             Christopher Agba
           </IdentityLink>
           <IdentityLink to="/robes" current={inRobes} accent="robes">
@@ -62,8 +66,8 @@ export function SiteHeader() {
       </div>
       <div className="mx-auto flex min-h-[4.5rem] w-full max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
         <Link to={inRobes ? '/robes' : '/'} className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
-          {inRobes ? (
-            <RobesLogo className="h-11 w-auto max-w-[11rem] object-contain object-left" />
+          {businessChrome ? (
+            <RobesLogo className="h-16 w-auto object-contain object-left" />
           ) : (
             <>
               <Portrait alt="" className="h-10 w-10 shrink-0 rounded-full border border-line" />
@@ -77,14 +81,14 @@ export function SiteHeader() {
           )}
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex" aria-label={inRobes ? 'Robes' : 'Portfolio'}>
+        <nav className="hidden items-center gap-6 lg:flex" aria-label={businessChrome ? 'Robes' : 'Portfolio'}>
           {links.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.to === '/robes' || item.to === '/'}
               className={({ isActive }) =>
-                `text-sm font-medium ${isActive ? (inRobes ? 'text-robes' : 'text-accent') : 'text-ink hover:text-accent'}`
+                `text-sm font-medium ${isActive ? (businessChrome ? 'text-robes' : 'text-accent') : 'text-ink hover:text-accent'}`
               }
             >
               {item.label}
@@ -110,9 +114,9 @@ export function SiteHeader() {
       </div>
 
       {open ? (
-        <nav id="mobile-navigation" aria-label="Mobile" className="border-t border-line bg-paper px-5 py-4 lg:hidden">
+        <nav id="mobile-navigation" aria-label="Mobile" className="border-t border-line bg-paper/70 px-5 py-4 backdrop-blur-xl lg:hidden">
           <p className="text-xs font-medium tracking-[0.16em] text-muted uppercase">
-            {inRobes ? 'Robes Leadership | Technology' : 'Christopher Agba'}
+            {businessChrome ? 'Robes Leadership | Technology' : 'Christopher Agba'}
           </p>
           <ul className="mt-2 space-y-1">
             {links.map((item) => (
@@ -122,7 +126,7 @@ export function SiteHeader() {
                   end={item.to === '/robes'}
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    `flex min-h-11 items-center text-lg ${isActive ? (inRobes ? 'text-robes' : 'text-accent') : 'text-ink'}`
+                    `flex min-h-11 items-center text-lg ${isActive ? (businessChrome ? 'text-robes' : 'text-accent') : 'text-ink'}`
                   }
                 >
                   {item.label}
@@ -133,7 +137,7 @@ export function SiteHeader() {
           <Link
             to={cta.to}
             onClick={() => setOpen(false)}
-            className={`${inRobes ? robesAction : primaryAction} mt-4 w-full`}
+            className={`${businessChrome ? robesAction : primaryAction} mt-4 w-full`}
           >
             {cta.label}
           </Link>

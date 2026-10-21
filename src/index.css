@@ -74,17 +74,47 @@
 
 html {
   scroll-behavior: smooth;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 1.0625rem;
   line-height: 1.65;
   text-rendering: optimizeLegibility;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 20rem),
+    radial-gradient(980px 560px at -6% -10%, rgba(27, 122, 69, 0.28), transparent 58%),
+    radial-gradient(760px 480px at 108% 0%, rgba(226, 206, 164, 0.55), transparent 52%),
+    radial-gradient(720px 460px at 74% 112%, rgba(27, 122, 69, 0.2), transparent 54%),
+    radial-gradient(480px 340px at 16% 78%, rgba(176, 204, 188, 0.4), transparent 52%),
+    var(--grain);
+  background-attachment: fixed;
+  background-blend-mode: normal, normal, normal, normal, normal, multiply;
+}
+
+.dark body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 16rem),
+    radial-gradient(980px 600px at -8% -10%, rgba(27, 122, 69, 0.46), transparent 56%),
+    radial-gradient(760px 500px at 112% 4%, rgba(90, 150, 210, 0.2), transparent 52%),
+    radial-gradient(860px 540px at 70% 112%, rgba(16, 92, 52, 0.55), transparent 55%),
+    radial-gradient(460px 320px at 14% 74%, rgba(183, 228, 196, 0.12), transparent 50%),
+    var(--grain);
+  background-blend-mode: normal, normal, normal, normal, normal, overlay;
+}
+
+.bg-band {
+  background-image:
+    radial-gradient(680px 240px at 0% 0%, rgba(183, 228, 196, 0.16), transparent 62%),
+    radial-gradient(520px 220px at 100% 100%, rgba(255, 255, 255, 0.07), transparent 58%),
+    var(--grain);
+  background-blend-mode: normal, normal, overlay;
 }
 
 ::selection {
@@ -159,6 +189,232 @@ body {
 
 .rise-delay {
   animation-delay: 0.12s;
+}
+
+.flow-stage {
+  perspective: 1400px;
+}
+
+.flow-board {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.flow-board.is-enter.flow-slide-right {
+  animation: flow-from-right 0.78s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.flow-board.is-leave.flow-slide-right {
+  animation: flow-to-left 0.72s cubic-bezier(0.4, 0, 0.7, 0.4) both;
+}
+
+.flow-board.is-enter.flow-slide-left {
+  animation: flow-from-left 0.78s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.flow-board.is-leave.flow-slide-left {
+  animation: flow-to-right 0.72s cubic-bezier(0.4, 0, 0.7, 0.4) both;
+}
+
+.flow-board.is-enter.flow-flip-up {
+  animation: flow-flip-in 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.flow-board.is-leave.flow-flip-up {
+  animation: flow-flip-out 0.7s ease-in both;
+}
+
+.flow-board.is-enter.flow-roll-down {
+  animation: flow-roll-in 0.82s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.flow-board.is-leave.flow-roll-down {
+  animation: flow-roll-out 0.72s ease-in both;
+}
+
+@keyframes flow-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(-78%) rotateY(8deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flow-to-left {
+  to {
+    opacity: 0;
+    transform: translateX(82%);
+  }
+}
+
+@keyframes flow-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(78%) rotateY(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flow-to-right {
+  to {
+    opacity: 0;
+    transform: translateX(-82%);
+  }
+}
+
+@keyframes flow-flip-in {
+  from {
+    opacity: 0;
+    transform: rotateX(74deg) translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flow-flip-out {
+  to {
+    opacity: 0;
+    transform: rotateX(-78deg) translateY(-40px);
+  }
+}
+
+@keyframes flow-roll-in {
+  from {
+    opacity: 0;
+    transform: translateY(-48%) rotateX(-58deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flow-roll-out {
+  to {
+    opacity: 0;
+    transform: translateY(52%) rotateX(48deg);
+  }
+}
+
+.demo-app h1.font-serif {
+  margin-top: 0.2rem;
+  font-family: var(--font-sans);
+  font-size: 1.55rem;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.demo-app h2.font-serif {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.demo-app p.font-serif {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+}
+
+.demo-app .border.bg-card,
+.demo-app .overflow-x-auto.border,
+.demo-app a.border.bg-card {
+  border-radius: 1rem;
+  background: color-mix(in oklab, white 82%, transparent);
+  box-shadow: 0 14px 36px rgba(16, 40, 28, 0.07);
+}
+
+.dark .demo-app .border.bg-card,
+.dark .demo-app .overflow-x-auto.border,
+.dark .demo-app a.border.bg-card {
+  background: color-mix(in oklab, var(--card) 88%, transparent);
+}
+
+.demo-app thead th {
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.demo-app tbody tr {
+  transition: background 0.15s ease;
+}
+
+.demo-app tbody tr:hover {
+  background: color-mix(in oklab, var(--robes-fill) 9%, transparent);
+}
+
+.demo-app .field,
+.demo-app .border-danger {
+  border-radius: 0.8rem;
+}
+
+.demo-app a.bg-robes-fill,
+.demo-app button.bg-robes-fill,
+.demo-app a.border,
+.demo-app button.border {
+  border-radius: 0.8rem;
+}
+
+.demo-app .app-status {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--brass) 16%, var(--paper-2));
+  padding: 0.2rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.demo-app .app-status[data-status='approved'],
+.demo-app .app-status[data-status='fulfilled'],
+.demo-app .app-status[data-status='completed'],
+.demo-app .app-status[data-status='received'] {
+  background: color-mix(in oklab, var(--robes-fill) 18%, white);
+  color: #0e4e2c;
+}
+
+.demo-app .app-status[data-status='pending'],
+.demo-app .app-status[data-status='submitted'],
+.demo-app .app-status[data-status='review'],
+.demo-app .app-status[data-status='partial'],
+.demo-app .app-status[data-status='draft'] {
+  background: color-mix(in oklab, #d7a441 24%, white);
+  color: #6a4a12;
+}
+
+.demo-app .app-status[data-status='rejected'],
+.demo-app .app-status[data-status='disputed'] {
+  background: color-mix(in oklab, var(--danger) 16%, white);
+  color: #8d2b2b;
+}
+
+.dark .demo-app .app-status[data-status='approved'],
+.dark .demo-app .app-status[data-status='fulfilled'],
+.dark .demo-app .app-status[data-status='completed'],
+.dark .demo-app .app-status[data-status='received'] {
+  color: #d7f5e4;
+}
+
+.dark .demo-app .app-status[data-status='rejected'],
+.dark .demo-app .app-status[data-status='disputed'] {
+  color: #ffb4ae;
 }
 
 @media print {

@@ -49,12 +49,10 @@ export const site = {
   valueProposition:
     'I help businesses simplify complex operations, automate inefficient processes, and build reliable software systems that improve productivity and support growth.',
   hero: {
-    titleStart: 'Technology That Helps Businesses',
-    titleEmphasis: 'Run Better.',
+    title: 'Build and Automate Custom Business Systems',
     support:
-      'I design and build reliable business software, automate complex workflows, and modernize existing systems to help organizations operate more efficiently.',
-    availability:
-      'Based in Abuja, Nigeria. Open to organizations in Nigeria and internationally.',
+      'Try a live workflow before you ask for one. A material request, a loading note, or an expense sheet — then request the same path for your business.',
+    availability: 'Based in Abuja, Nigeria. Open to organizations in Nigeria and internationally.',
   },
   ctas: {
     nav: 'Discuss Your Project',
@@ -371,7 +369,6 @@ export const site = {
 }
 
 export const navigation = [
-  { label: 'About', to: '/about' },
   { label: 'Solutions', to: '/solutions' },
   { label: 'Selected Work', to: '/work' },
   { label: 'Contact', to: '/contact' },

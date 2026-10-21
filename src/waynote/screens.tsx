@@ -390,7 +390,7 @@ function NoteTable({ rows, empty }: { rows: DispatchNote[]; empty: string }) {
 }
 
 function StatusPill({ status }: { status: NoteStatus }) {
-  return <span className="inline-flex items-center border border-line px-2 py-1 text-xs font-medium tracking-wide text-ink uppercase">{statusLabel(status)}</span>
+  return <span data-status={status} className="app-status">{statusLabel(status)}</span>
 }
 
 function EmptyTitle({ title, text }: { title: string; text: string }) {

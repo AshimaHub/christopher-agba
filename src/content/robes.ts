@@ -17,10 +17,10 @@ export const robes = {
   mission:
     'To help businesses replace fragile manual operations with reliable software, and to develop a leadership practice that stays honest about what is ready and what is still ahead.',
   logos: {
-    green: '/brand/robes-logo-green.jpg',
-    black: '/brand/robes-logo-green.jpg',
-    white: '/brand/robes-logo-green.jpg',
-    mark: '/brand/robes-logo-green.jpg',
+    green: '/brand/robes-logo.png',
+    black: '/brand/robes-logo.png',
+    white: '/brand/robes-logo-ondark.png',
+    mark: '/brand/robes-logo.png',
   },
   navigation: [
     { label: 'About Robes', to: '/robes' },

@@ -589,7 +589,7 @@ function RequestTable({ rows, empty }: { rows: MaterialRequest[]; empty: string 
 
 export function StatusPill({ status }: { status: RequestStatus }) {
   return (
-    <span className="inline-flex items-center border border-line px-2 py-1 text-xs font-medium tracking-wide text-ink uppercase">
+    <span data-status={status} className="app-status">
       {statusLabel(status)}
     </span>
   )

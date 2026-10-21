@@ -19,7 +19,7 @@ export function Layout() {
   }, [pathname, hash])
 
   return (
-    <div className="flex min-h-svh flex-col bg-paper text-ink">
+    <div className="flex min-h-svh flex-col text-ink">
       <a className="skip-link" href="#content">
         Skip to content
       </a>

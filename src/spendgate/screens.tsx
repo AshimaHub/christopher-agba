@@ -335,7 +335,7 @@ function SheetTable({ rows, empty }: { rows: Sheet[]; empty: string }) {
 }
 
 function StatusPill({ status }: { status: SheetStatus }) {
-  return <span className="inline-flex items-center border border-line px-2 py-1 text-xs font-medium tracking-wide text-ink uppercase">{statusLabel(status)}</span>
+  return <span data-status={status} className="app-status">{statusLabel(status)}</span>
 }
 
 function EmptyTitle({ title, text }: { title: string; text: string }) {
