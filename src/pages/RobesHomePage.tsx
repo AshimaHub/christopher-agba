@@ -67,6 +67,33 @@ export function RobesHomePage() {
             <Link to="/robes/solutions/spendgate" className={`${robesLink} mt-3 inline-flex`}>
               Try the expense approval demo
             </Link>
+            <Link to="/robes/solutions/siteledger" className={`${robesLink} mt-3 inline-flex`}>
+              Try the stock ledger demo
+            </Link>
+            <Link to="/robes/solutions/hirehours" className={`${robesLink} mt-3 inline-flex`}>
+              Try the plant hire hours demo
+            </Link>
+            <Link to="/robes/solutions/beneficiaries" className={`${robesLink} mt-3 inline-flex`}>
+              Try the beneficiaries demo
+            </Link>
+            <Link to="/robes/solutions/fuelwatch" className={`${robesLink} mt-3 inline-flex`}>
+              Try the fuel issue demo
+            </Link>
+            <Link to="/robes/solutions/fleetboard" className={`${robesLink} mt-3 inline-flex`}>
+              Try the morning fleet board
+            </Link>
+            <Link to="/robes/solutions/plantday" className={`${robesLink} mt-3 inline-flex`}>
+              Try the shift close demo
+            </Link>
+            <Link to="/robes/solutions/waiting" className={`${robesLink} mt-3 inline-flex`}>
+              Try the waiting inbox
+            </Link>
+            <Link to="/robes/solutions/repairlog" className={`${robesLink} mt-3 inline-flex`}>
+              Try the repair log
+            </Link>
+            <Link to="/robes/solutions/receivecheck" className={`${robesLink} mt-3 inline-flex`}>
+              Try the bill check
+            </Link>
           </article>
           <article className="border border-line p-6 sm:p-8">
             <p className="text-xs font-medium tracking-[0.16em] text-robes uppercase">Pillar 2</p>

@@ -22,9 +22,83 @@ import { RobesHomePage } from './pages/RobesHomePage.tsx'
 import { RobesLeadershipPage } from './pages/RobesLeadershipPage.tsx'
 import { RobesSolutionsPage } from './pages/RobesSolutionsPage.tsx'
 import { ClearRequestPage } from './pages/ClearRequestPage.tsx'
+import { BeneficiariesPage } from './pages/BeneficiariesPage.tsx'
+import { FleetBoardPage } from './pages/FleetBoardPage.tsx'
+import { PlantDayPage } from './pages/PlantDayPage.tsx'
+import { ReceiveCheckPage } from './pages/ReceiveCheckPage.tsx'
+import { RepairLogPage } from './pages/RepairLogPage.tsx'
+import { WaitingPage } from './pages/WaitingPage.tsx'
+import { FuelWatchPage } from './pages/FuelWatchPage.tsx'
+import { HireHoursPage } from './pages/HireHoursPage.tsx'
+import { SiteLedgerPage } from './pages/SiteLedgerPage.tsx'
 import { SpendGatePage } from './pages/SpendGatePage.tsx'
 import { WaynotePage } from './pages/WaynotePage.tsx'
 import { WorkPage } from './pages/WorkPage.tsx'
+import { ReceiveCheckDemo } from './receivecheck/ReceiveCheckDemo.tsx'
+import {
+  ActivityScreen as ReceiveActivityScreen,
+  BillScreen,
+  BillsScreen,
+} from './receivecheck/screens.tsx'
+import { RepairLogDemo } from './repairlog/RepairLogDemo.tsx'
+import {
+  ActivityScreen as RepairActivityScreen,
+  AssetScreen,
+  JobScreen,
+  LogScreen,
+} from './repairlog/screens.tsx'
+import { WaitingDemo } from './waiting/WaitingDemo.tsx'
+import {
+  ActivityScreen as WaitActivityScreen,
+  InboxScreen,
+  ItemScreen,
+} from './waiting/screens.tsx'
+import { PlantDayDemo } from './plantday/PlantDayDemo.tsx'
+import {
+  ActivityScreen as PlantActivityScreen,
+  MachineScreen as PlantMachineScreen,
+  ShiftScreen,
+} from './plantday/screens.tsx'
+import { FleetBoardDemo } from './fleetboard/FleetBoardDemo.tsx'
+import {
+  ActivityScreen as FleetActivityScreen,
+  BoardScreen,
+  UnitScreen,
+} from './fleetboard/screens.tsx'
+import { FuelWatchDemo } from './fuelwatch/FuelWatchDemo.tsx'
+import {
+  ActivityScreen as FuelActivityScreen,
+  IssueScreen,
+  IssuesScreen as FuelIssuesScreen,
+  MachinesScreen,
+  OverviewScreen as FuelOverviewScreen,
+} from './fuelwatch/screens.tsx'
+import { BeneficiariesDemo } from './beneficiaries/BeneficiariesDemo.tsx'
+import {
+  ActivityScreen as PayeeActivityScreen,
+  NewPayeeScreen,
+  OverviewScreen as PayeeOverviewScreen,
+  PayeeScreen,
+  PayeesScreen,
+} from './beneficiaries/screens.tsx'
+import { HireHoursDemo } from './hirehours/HireHoursDemo.tsx'
+import {
+  ActivityScreen as HireActivityScreen,
+  DayScreen,
+  DaysScreen,
+  MachineScreen,
+  OverviewScreen as HireOverviewScreen,
+  PlantScreen,
+} from './hirehours/screens.tsx'
+import { SiteLedgerDemo } from './siteledger/SiteLedgerDemo.tsx'
+import {
+  ActivityScreen as LedgerActivityScreen,
+  CardScreen,
+  IssuesScreen,
+  OverviewScreen as LedgerOverviewScreen,
+  ReceiptsScreen,
+  StockScreen,
+} from './siteledger/screens.tsx'
 import { SpendGateDemo } from './spendgate/SpendGateDemo.tsx'
 import {
   ActivityScreen as SpendActivityScreen,
@@ -72,6 +146,62 @@ export default function App() {
           <Route path="activity" element={<WaynoteActivityScreen />} />
           <Route path="reports" element={<WaynoteReportsScreen />} />
         </Route>
+        <Route path="robes/demo/receivecheck" element={<ReceiveCheckDemo />}>
+          <Route index element={<BillsScreen />} />
+          <Route path="bills/:id" element={<BillScreen />} />
+          <Route path="activity" element={<ReceiveActivityScreen />} />
+        </Route>
+        <Route path="robes/demo/repairlog" element={<RepairLogDemo />}>
+          <Route index element={<LogScreen />} />
+          <Route path="jobs/:id" element={<JobScreen />} />
+          <Route path="assets/:id" element={<AssetScreen />} />
+          <Route path="activity" element={<RepairActivityScreen />} />
+        </Route>
+        <Route path="robes/demo/waiting" element={<WaitingDemo />}>
+          <Route index element={<InboxScreen />} />
+          <Route path="items/:id" element={<ItemScreen />} />
+          <Route path="activity" element={<WaitActivityScreen />} />
+        </Route>
+        <Route path="robes/demo/plantday" element={<PlantDayDemo />}>
+          <Route index element={<ShiftScreen />} />
+          <Route path="machines/:id" element={<PlantMachineScreen />} />
+          <Route path="activity" element={<PlantActivityScreen />} />
+        </Route>
+        <Route path="robes/demo/fleetboard" element={<FleetBoardDemo />}>
+          <Route index element={<BoardScreen />} />
+          <Route path="units/:id" element={<UnitScreen />} />
+          <Route path="activity" element={<FleetActivityScreen />} />
+        </Route>
+        <Route path="robes/demo/fuelwatch" element={<FuelWatchDemo />}>
+          <Route index element={<FuelOverviewScreen />} />
+          <Route path="issues" element={<FuelIssuesScreen />} />
+          <Route path="issues/:id" element={<IssueScreen />} />
+          <Route path="machines" element={<MachinesScreen />} />
+          <Route path="activity" element={<FuelActivityScreen />} />
+        </Route>
+        <Route path="robes/demo/beneficiaries" element={<BeneficiariesDemo />}>
+          <Route index element={<PayeeOverviewScreen />} />
+          <Route path="payees" element={<PayeesScreen />} />
+          <Route path="payees/new" element={<NewPayeeScreen />} />
+          <Route path="payees/:id" element={<PayeeScreen />} />
+          <Route path="activity" element={<PayeeActivityScreen />} />
+        </Route>
+        <Route path="robes/demo/hirehours" element={<HireHoursDemo />}>
+          <Route index element={<HireOverviewScreen />} />
+          <Route path="plant" element={<PlantScreen />} />
+          <Route path="plant/:machineId" element={<MachineScreen />} />
+          <Route path="days" element={<DaysScreen />} />
+          <Route path="days/:id" element={<DayScreen />} />
+          <Route path="activity" element={<HireActivityScreen />} />
+        </Route>
+        <Route path="robes/demo/siteledger" element={<SiteLedgerDemo />}>
+          <Route index element={<LedgerOverviewScreen />} />
+          <Route path="stock" element={<StockScreen />} />
+          <Route path="stock/:placeId/:itemId" element={<CardScreen />} />
+          <Route path="receipts" element={<ReceiptsScreen />} />
+          <Route path="issues" element={<IssuesScreen />} />
+          <Route path="activity" element={<LedgerActivityScreen />} />
+        </Route>
         <Route path="robes/demo/spendgate" element={<SpendGateDemo />}>
           <Route index element={<SpendOverviewScreen />} />
           <Route path="claims" element={<ClaimsScreen />} />
@@ -94,6 +224,15 @@ export default function App() {
           <Route path="robes/solutions/clearrequest" element={<ClearRequestPage />} />
           <Route path="robes/solutions/waynote" element={<WaynotePage />} />
           <Route path="robes/solutions/spendgate" element={<SpendGatePage />} />
+          <Route path="robes/solutions/siteledger" element={<SiteLedgerPage />} />
+          <Route path="robes/solutions/hirehours" element={<HireHoursPage />} />
+          <Route path="robes/solutions/beneficiaries" element={<BeneficiariesPage />} />
+          <Route path="robes/solutions/fuelwatch" element={<FuelWatchPage />} />
+          <Route path="robes/solutions/fleetboard" element={<FleetBoardPage />} />
+          <Route path="robes/solutions/plantday" element={<PlantDayPage />} />
+          <Route path="robes/solutions/waiting" element={<WaitingPage />} />
+          <Route path="robes/solutions/repairlog" element={<RepairLogPage />} />
+          <Route path="robes/solutions/receivecheck" element={<ReceiveCheckPage />} />
           <Route path="robes/leadership" element={<RobesLeadershipPage />} />
           <Route path="robes/contact" element={<RobesContactPage />} />
           <Route path="*" element={<NotFoundPage />} />

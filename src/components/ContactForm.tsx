@@ -43,6 +43,60 @@ function initialChallenge(service: string | null, intent: string | null) {
   if (service === 'spendgate' && intent === 'workflow') {
     return 'I would like to discuss a business workflow. The SpendGate demonstration is close to the expense approval we need.'
   }
+  if (service === 'siteledger' && intent === 'similar') {
+    return 'I would like a stock-ledger solution similar to the SiteLedger demonstration, adapted to our operation.'
+  }
+  if (service === 'siteledger' && intent === 'workflow') {
+    return 'I would like to discuss a business workflow. The SiteLedger demonstration is close to the stock visibility we need.'
+  }
+  if (service === 'hirehours' && intent === 'similar') {
+    return 'I would like a hired-hours solution similar to the HireHours demonstration, adapted to our operation.'
+  }
+  if (service === 'hirehours' && intent === 'workflow') {
+    return 'I would like to discuss a business workflow. The HireHours demonstration is close to the plant-hire visibility we need.'
+  }
+  if (service === 'beneficiaries' && intent === 'similar') {
+    return 'I would like a payee-register solution similar to the Beneficiaries demonstration, adapted to our operation.'
+  }
+  if (service === 'beneficiaries' && intent === 'workflow') {
+    return 'I would like to discuss a business workflow. The Beneficiaries demonstration is close to the payee control we need.'
+  }
+  if (service === 'fuelwatch' && intent === 'similar') {
+    return 'I would like a fuel-issue solution similar to the FuelWatch demonstration, adapted to our operation.'
+  }
+  if (service === 'fuelwatch' && intent === 'workflow') {
+    return 'I would like to discuss a business workflow. The FuelWatch demonstration is close to the fuel visibility we need.'
+  }
+  if (service === 'fleetboard' && intent === 'similar') {
+    return 'I would like a morning fleet board similar to the FleetBoard demonstration, adapted to our operation.'
+  }
+  if (service === 'fleetboard' && intent === 'workflow') {
+    return 'I would like to discuss a business workflow. The FleetBoard demonstration is close to the morning visibility we need.'
+  }
+  if (service === 'plantday' && intent === 'similar') {
+    return 'I would like a shift-close solution similar to the PlantDay demonstration, adapted to our operation.'
+  }
+  if (service === 'plantday' && intent === 'workflow') {
+    return 'I would like to discuss a business workflow. The PlantDay demonstration is close to the end-of-day visibility we need.'
+  }
+  if (service === 'waiting' && intent === 'similar') {
+    return 'I would like a waiting-inbox solution similar to the Waiting On You demonstration, adapted to our operation.'
+  }
+  if (service === 'waiting' && intent === 'workflow') {
+    return 'I would like to discuss a business workflow. The Waiting On You demonstration is close to the approval visibility we need.'
+  }
+  if (service === 'repairlog' && intent === 'similar') {
+    return 'I would like a repair-log solution similar to the RepairLog demonstration, adapted to our operation.'
+  }
+  if (service === 'repairlog' && intent === 'workflow') {
+    return 'I would like to discuss a business workflow. The RepairLog demonstration is close to the maintenance record we need.'
+  }
+  if (service === 'receivecheck' && intent === 'similar') {
+    return 'I would like a bill-check solution similar to the ReceiveCheck demonstration, adapted to our operation.'
+  }
+  if (service === 'receivecheck' && intent === 'workflow') {
+    return 'I would like to discuss a business workflow. The ReceiveCheck demonstration is close to the supplier-bill check we need.'
+  }
   return ''
 }
 
@@ -162,14 +216,15 @@ export function ContactForm({
       className="relative space-y-5"
       onSubmit={onSubmit}
       noValidate
-      aria-describedby={`${formId}-note`}
+      aria-describedby={pathway === 'robes' ? undefined : `${formId}-note`}
     >
-      <p id={`${formId}-note`} className="text-sm leading-relaxed text-muted">
-        This inquiry is for {pathway === 'robes' ? 'Robes Leadership | Technology' : 'Christopher Agba'}.
-        Both pathways use {site.contact.email} while the brand is being built. This site does not
-        store the message. It prepares an email for you to send, or to copy if your email app does
-        not open.
-      </p>
+      {pathway === 'robes' ? null : (
+        <p id={`${formId}-note`} className="text-sm leading-relaxed text-muted">
+          This inquiry is for Christopher Agba. The message is prepared for {site.contact.email}. This
+          site does not store it. It opens an email for you to send, or to copy if your email app does
+          not open.
+        </p>
+      )}
 
       {errorCount > 0 ? (
         <div role="alert" className="border border-danger px-4 py-3 text-sm text-danger">

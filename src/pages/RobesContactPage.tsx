@@ -18,9 +18,8 @@ export function RobesContactPage() {
       />
       <PageIntro eyebrow="Work with Robes" title="Discuss your business challenge.">
         <p>
-          Use this form for software projects, enterprise solutions, and commercial inquiries under
-          the Robes brand. Employment and personal collaborations belong on Contact Christopher.
-          The message is prepared for {site.contact.email}. It is not stored on a server.
+          Tell us what&apos;s slowing your business down. Let&apos;s explore how a custom software
+          solution can simplify your operations, reduce costs, and help your business run smarter.
         </p>
       </PageIntro>
       <Container className="grid gap-12 py-16 md:py-20 lg:grid-cols-[1.2fr_0.8fr]">
@@ -36,11 +35,44 @@ export function RobesContactPage() {
             <li>Christopher replies with a practical next step.</li>
             <li>If the work fits, you receive a scoped proposal. There is no public price list.</li>
           </ol>
-          <p className="mt-6 text-sm text-ink">{site.contact.email}</p>
-          <p className="mt-1 text-sm text-ink">{site.contact.phoneDisplay}</p>
-          <p className="mt-1 text-sm text-muted">{site.contact.location}</p>
+          <div className="mt-6 grid gap-3">
+            <a
+              href={`mailto:${site.contact.email}?subject=${encodeURIComponent('Conversation with Robes')}&body=${encodeURIComponent('Hello Robes,\n\n')}`}
+              className="rounded-2xl border border-line bg-paper px-4 py-3 transition hover:border-robes"
+            >
+              <span className="block text-xs font-medium tracking-[0.12em] text-robes uppercase">Email</span>
+              <span className="mt-1 block text-lg font-semibold text-ink">{site.contact.email}</span>
+              <span className="mt-1 block text-sm text-muted">Click to start a conversation with Robes</span>
+            </a>
+            <a
+              href={`${site.contact.whatsapp}?text=${encodeURIComponent('Hello Robes, I would like to start a conversation about a business challenge.')}`}
+              className="rounded-2xl border border-line bg-paper px-4 py-3 transition hover:border-robes"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="flex items-center gap-2 text-xs font-medium tracking-[0.12em] text-robes uppercase">
+                <PhoneIcon />
+                WhatsApp
+              </span>
+              <span className="mt-1 block text-lg font-semibold text-ink">{site.contact.phoneDisplay}</span>
+              <span className="mt-1 block text-sm text-muted">Click to start a conversation with Robes</span>
+            </a>
+          </div>
+          <p className="mt-4 text-sm text-muted">{site.contact.location}</p>
         </aside>
       </Container>
     </>
+  )
+}
+
+function PhoneIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M7 3.5h3.2l1.2 3.1-1.8 1.1a12.5 12.5 0 0 0 5.7 5.7l1.1-1.8 3.1 1.2V16a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 5 6.7 2 2 0 0 1 7 3.5Z"
+      />
+    </svg>
   )
 }

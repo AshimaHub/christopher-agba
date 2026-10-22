@@ -51,7 +51,7 @@ export const site = {
   hero: {
     title: 'Build and Automate Custom Business Systems',
     support:
-      'Try a live workflow before you ask for one. A material request, a loading note, or an expense sheet — then request the same path for your business.',
+      'Try a live workflow before you ask for one. A material request, a loading note, an expense sheet, a stock card, hired-machine hours, a payee list, a fuel issue, a morning machine board, a shift close, a waiting inbox, a repair log, or a supplier bill — then request the same path for your business.',
     availability: 'Based in Abuja, Nigeria. Open to organizations in Nigeria and internationally.',
   },
   ctas: {

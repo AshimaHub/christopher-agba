@@ -187,6 +187,21 @@ body {
   animation: rise 0.8s ease both;
 }
 
+@keyframes hero-swap {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-swap {
+  animation: hero-swap 0.55s ease;
+}
+
 .rise-delay {
   animation-delay: 0.12s;
 }
@@ -385,7 +400,9 @@ body {
 .demo-app .app-status[data-status='approved'],
 .demo-app .app-status[data-status='fulfilled'],
 .demo-app .app-status[data-status='completed'],
-.demo-app .app-status[data-status='received'] {
+.demo-app .app-status[data-status='received'],
+.demo-app .app-status[data-status='logged'],
+.demo-app .app-status[data-status='accepted'] {
   background: color-mix(in oklab, var(--robes-fill) 18%, white);
   color: #0e4e2c;
 }
@@ -400,7 +417,8 @@ body {
 }
 
 .demo-app .app-status[data-status='rejected'],
-.demo-app .app-status[data-status='disputed'] {
+.demo-app .app-status[data-status='disputed'],
+.demo-app .app-status[data-status='queried'] {
   background: color-mix(in oklab, var(--danger) 16%, white);
   color: #8d2b2b;
 }
@@ -408,12 +426,15 @@ body {
 .dark .demo-app .app-status[data-status='approved'],
 .dark .demo-app .app-status[data-status='fulfilled'],
 .dark .demo-app .app-status[data-status='completed'],
-.dark .demo-app .app-status[data-status='received'] {
+.dark .demo-app .app-status[data-status='received'],
+.dark .demo-app .app-status[data-status='logged'],
+.dark .demo-app .app-status[data-status='accepted'] {
   color: #d7f5e4;
 }
 
 .dark .demo-app .app-status[data-status='rejected'],
-.dark .demo-app .app-status[data-status='disputed'] {
+.dark .demo-app .app-status[data-status='disputed'],
+.dark .demo-app .app-status[data-status='queried'] {
   color: #ffb4ae;
 }
 

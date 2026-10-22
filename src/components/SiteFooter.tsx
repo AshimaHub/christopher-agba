@@ -18,54 +18,53 @@ export function SiteFooter() {
           </Link>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-band-muted">{site.role}</p>
           <ul className="mt-4 space-y-2">
-            {navigation.map((item) => (
-              <li key={item.to}>
-                <Link to={item.to} className="text-sm text-band-ink hover:underline">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {navigation
+              .filter((item) => item.label !== 'Contact')
+              .map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} className="text-sm text-band-ink hover:underline">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
           </ul>
         </div>
         <div>
           <RobesLogo surface="dark" className="h-16 w-auto max-w-[5rem] object-contain object-left" />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-band-muted">{robes.proposition}</p>
           <ul className="mt-4 space-y-2">
-            {robes.navigation.map((item) => (
-              <li key={item.to}>
-                <Link to={item.to} className="text-sm text-band-ink hover:underline">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {robes.navigation
+              .filter((item) => item.label !== 'Contact')
+              .map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} className="text-sm text-band-ink hover:underline">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
           </ul>
         </div>
         <div>
-          <p className="text-xs font-medium tracking-[0.16em] text-band-muted uppercase">Contact</p>
+          <p className="flex items-center gap-2 text-xs font-medium tracking-[0.16em] text-band-muted uppercase">
+            <PhoneIcon />
+            Contact
+          </p>
           <ul className="mt-4 space-y-2 text-sm">
-            <li>
-              <Link className="hover:underline" to="/contact">
-                Contact Christopher
-              </Link>
-            </li>
-            <li>
-              <Link className="hover:underline" to="/robes/contact">
-                Contact Robes
-              </Link>
-            </li>
             <li>
               <a className="hover:underline" href={`mailto:${site.contact.email}`}>
                 {site.contact.email}
               </a>
             </li>
             <li>
-              <a className="hover:underline" href={`tel:${site.contact.phoneTel}`}>
+              <a
+                className="inline-flex items-center gap-2 hover:underline"
+                href={`${site.contact.whatsapp}?text=${encodeURIComponent('Hello Robes, I would like to start a conversation.')}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <PhoneIcon />
                 {site.contact.phoneDisplay}
-              </a>
-            </li>
-            <li>
-              <a className="hover:underline" href={site.contact.whatsapp}>
-                WhatsApp
+                <span className="text-band-muted">WhatsApp</span>
               </a>
             </li>
             <li className="text-band-muted">{site.contact.location}</li>
@@ -86,5 +85,17 @@ export function SiteFooter() {
         </p>
       </div>
     </footer>
+  )
+}
+
+function PhoneIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M7 3.5h3.2l1.2 3.1-1.8 1.1a12.5 12.5 0 0 0 5.7 5.7l1.1-1.8 3.1 1.2V16a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 5 6.7 2 2 0 0 1 7 3.5Z"
+      />
+    </svg>
   )
 }
