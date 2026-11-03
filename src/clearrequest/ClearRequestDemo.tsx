@@ -44,6 +44,7 @@ function DemoFrame() {
         businessName={business.name}
         businessLine={`${business.trade}. Sample business.`}
         backTo="/robes/solutions/clearrequest"
+        inquire={{ to: '/robes/contact?service=clearrequest&intent=similar', label: 'Request a Consultation' }}
         links={links.map((link) => ({
           ...link,
           count: link.label === 'Approvals' ? pending : link.label === 'Issuing' ? issuing : undefined,
@@ -95,7 +96,7 @@ function Guide() {
   }
   if (step === 4) {
     title = 'Imagine this level of visibility and control in your organization.'
-    text = 'Robes Leadership | Technology helps businesses design software solutions tailored to their operational challenges.'
+    text = 'Robes Leadership & Technology helps businesses design software solutions tailored to their operational challenges.'
   }
 
   return (
@@ -141,10 +142,10 @@ function Guide() {
         {step === 4 ? (
           <>
             <Link to="/robes/contact?service=clearrequest&intent=similar" className="inline-flex min-h-11 items-center bg-robes-fill px-4 text-sm font-medium text-robes-ink">
-              Request this for your business
+              Request a Consultation
             </Link>
-            <Link to="/robes/contact?service=clearrequest&intent=workflow" className="inline-flex min-h-11 items-center border border-line px-4 text-sm">
-              Discuss your business workflow
+            <Link to="/contact" className="inline-flex min-h-11 items-center border border-line px-4 text-sm">
+              Discuss Your Project
             </Link>
           </>
         ) : (

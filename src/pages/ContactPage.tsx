@@ -18,10 +18,11 @@ export function ContactPage() {
       />
       <PageIntro eyebrow="Contact Christopher" title="A conversation with me, not with a company inbox.">
         <p>
-          Use this form for employment, technical collaboration, individual consulting, speaking,
-          or a professional introduction. For a business software project under the Robes brand,{' '}
+          Use this form for employment, technical collaboration, consulting, or a project. It opens
+          your email app with the message ready. Nothing is delivered until you send that email.
+          For a business project under RL&T,{' '}
           <Link to="/robes/contact" className={robesLink}>
-            contact Robes
+            use the company contact page
           </Link>
           {'.'}
         </p>
@@ -67,6 +68,12 @@ export function ContactPage() {
               <dd className="mt-1 text-ink">{site.contact.location}</dd>
             </div>
           </dl>
+          {!site.contact.linkedin || !site.contact.github ? (
+            <p className="mt-8 border-t border-line pt-6 text-sm text-muted">
+              {[!site.contact.linkedin ? 'LinkedIn' : null, !site.contact.github ? 'GitHub' : null].filter(Boolean).join(' and ')}{' '}
+              {(!site.contact.linkedin && !site.contact.github) ? 'are' : 'is'} not listed yet. A profile appears here only after its URL is added.
+            </p>
+          ) : null}
           {socialLinks().length > 0 ? (
             <div className="mt-8 border-t border-line pt-6">
               <h3 className="text-sm font-medium text-ink">Elsewhere</h3>

@@ -18,7 +18,7 @@ export function CaseStudyPage() {
       <article>
         <Container className="py-16 md:py-24">
           <Link to="/work" className={textLink}>
-            Back to selected work
+            Back to case studies
           </Link>
           <p className="mt-8 text-xs font-medium tracking-[0.16em] text-brass uppercase">
             {study.statusLabel}
@@ -30,9 +30,9 @@ export function CaseStudyPage() {
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{study.summary}</p>
 
           <div className="mt-12 grid gap-8 border-t border-line pt-10 md:grid-cols-3">
-            <Section label="The challenge" text={study.challenge} />
-            <Section label="My responsibility" text={study.responsibility} />
-            <Section label="The approach" text={study.approach} />
+            <Section label="Business Challenge" text={study.challenge} />
+            <Section label="Engineering Approach" text={study.approach} />
+            <Section label="Solution" text={study.responsibility} />
           </div>
 
           <div className="mt-12 border-t border-line pt-10">

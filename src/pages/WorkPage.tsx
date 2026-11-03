@@ -11,11 +11,11 @@ export function WorkPage() {
   return (
     <>
       <Seo
-        title={`Selected Work · ${site.name}`}
-        description="Selected professional experience and clearly labelled demonstrations from Christopher Agba. Confidential details and unverified results are not published."
+        title={`Case Studies · ${site.name}`}
+        description="Case studies from Christopher Agba. Professional experience withholds confidential details. Demonstrations are labelled and do not claim measured results."
         path="/work"
       />
-      <PageIntro eyebrow="Selected work" title="What I have done, and what is only a demonstration.">
+      <PageIntro eyebrow="Case studies" title="Business challenge, approach, and what can honestly be said.">
         <p>
           Professional experience describes real responsibility, with confidential details withheld.
           Independent demonstrations show how I approach a business problem. They are not client

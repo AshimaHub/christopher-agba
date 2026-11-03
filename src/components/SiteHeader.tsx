@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { navigation } from '../content/site.ts'
+import { navigation, site } from '../content/site.ts'
 import { robes } from '../content/robes.ts'
 import { primaryAction, primaryLook, robesAction, robesLook } from '../lib/styles.ts'
 import { Portrait } from './Portrait.tsx'
@@ -12,13 +12,12 @@ export function SiteHeader() {
   const { pathname } = useLocation()
   const onHome = pathname === '/'
   const inRobes = pathname.startsWith('/robes')
-  const businessChrome = onHome || inRobes
-  const links = businessChrome ? robes.navigation : navigation
+  const links = navigation
   const cta = onHome
-    ? { to: '/robes/solutions', label: 'Try a live demo', className: robesLook }
+    ? { to: '/contact', label: 'Discuss Your Project', className: robesLook }
     : inRobes
       ? { to: '/robes/contact', label: 'Request a Consultation', className: robesLook }
-      : { to: '/contact', label: 'Contact Christopher', className: primaryLook }
+      : { to: '/contact', label: 'Discuss Your Project', className: primaryLook }
 
   useEffect(() => {
     if (!open) return
@@ -59,14 +58,14 @@ export function SiteHeader() {
             Christopher Agba
           </IdentityLink>
           <IdentityLink to="/robes" current={inRobes} accent="robes">
-            <span className="sm:hidden">Robes</span>
-            <span className="hidden sm:inline">Robes Leadership | Technology</span>
+            <span className="sm:hidden">RL&T</span>
+            <span className="hidden sm:inline">{robes.name}</span>
           </IdentityLink>
         </nav>
       </div>
       <div className="mx-auto flex min-h-[4.5rem] w-full max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
         <Link to={inRobes ? '/robes' : '/'} className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
-          {businessChrome ? (
+          {inRobes ? (
             <RobesLogo className="h-16 w-auto object-contain object-left" />
           ) : (
             <>
@@ -75,20 +74,20 @@ export function SiteHeader() {
                 <span className="block truncate text-sm font-medium leading-tight text-ink">
                   Christopher Agba
                 </span>
-                <span className="hidden text-xs text-muted sm:block">Personal portfolio</span>
+                <span className="hidden text-xs text-muted sm:block">{site.shortRole}</span>
               </span>
             </>
           )}
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex" aria-label={businessChrome ? 'Robes' : 'Portfolio'}>
+        <nav className="hidden items-center gap-6 lg:flex" aria-label={inRobes ? 'Robes' : 'Portfolio'}>
           {links.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
-              end={item.to === '/robes' || item.to === '/'}
+              end={item.to !== '/work'}
               className={({ isActive }) =>
-                `text-sm font-medium ${isActive ? (businessChrome ? 'text-robes' : 'text-accent') : 'text-ink hover:text-accent'}`
+                `text-sm font-medium ${isActive ? (inRobes ? 'text-robes' : 'text-accent') : 'text-ink hover:text-accent'}`
               }
             >
               {item.label}
@@ -116,17 +115,17 @@ export function SiteHeader() {
       {open ? (
         <nav id="mobile-navigation" aria-label="Mobile" className="border-t border-line bg-paper/70 px-5 py-4 backdrop-blur-xl lg:hidden">
           <p className="text-xs font-medium tracking-[0.16em] text-muted uppercase">
-            {businessChrome ? 'Robes Leadership | Technology' : 'Christopher Agba'}
+            {inRobes ? robes.name : 'Christopher Agba'}
           </p>
           <ul className="mt-2 space-y-1">
             {links.map((item) => (
               <li key={item.to}>
                 <NavLink
                   to={item.to}
-                  end={item.to === '/robes'}
+                  end={item.to !== '/work'}
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    `flex min-h-11 items-center text-lg ${isActive ? (businessChrome ? 'text-robes' : 'text-accent') : 'text-ink'}`
+                    `flex min-h-11 items-center text-lg ${isActive ? (inRobes ? 'text-robes' : 'text-accent') : 'text-ink'}`
                   }
                 >
                   {item.label}
@@ -137,7 +136,7 @@ export function SiteHeader() {
           <Link
             to={cta.to}
             onClick={() => setOpen(false)}
-            className={`${businessChrome ? robesAction : primaryAction} mt-4 w-full`}
+            className={`${inRobes ? robesAction : primaryAction} mt-4 w-full`}
           >
             {cta.label}
           </Link>

@@ -29,6 +29,7 @@ export function Portrait({ alt, className = '', priority = false }: PortraitProp
       width={800}
       height={1067}
       decoding="async"
+      loading={priority ? 'eager' : 'lazy'}
       fetchPriority={priority ? 'high' : 'auto'}
       onError={() => setFailed(true)}
       className={`object-cover object-[center_30%] ${className}`}

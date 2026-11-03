@@ -1,5 +1,5 @@
 /**
- * Edit this file to update the Robes Leadership | Technology pages.
+ * Edit this file to update the Robes Leadership & Technology pages.
  * Do not describe leadership areas as paid services you already sell.
  * Do not add client counts, testimonials, or performance figures here.
  *
@@ -7,11 +7,11 @@
  */
 
 export const robes = {
-  name: 'Robes Leadership | Technology',
-  shortName: 'Robes',
-  proposition: 'Empowering Businesses Through Technology. Advancing People Through Leadership.',
+  name: 'Robes Leadership & Technology',
+  shortName: 'RL&T',
+  proposition: 'Engineering Intelligent Solutions for Modern Business.',
   status:
-    'Robes is an emerging brand led by Christopher Agba. This site does not present it as a registered company, an established agency, or a large team.',
+    'RL&T is an emerging brand led by Christopher Agba. This site does not present it as a registered company, an established agency, or a large team. It does not claim customers, revenue, partnerships, or offices.',
   vision:
     'Organizations that can see their work clearly, and people who can lead that kind of change with sound judgment.',
   mission:

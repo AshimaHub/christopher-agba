@@ -1,21 +1,25 @@
 import { useId, useState, type FormEvent } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { site } from '../content/site.ts'
+import { track } from '../lib/analytics.ts'
+import { deliverInquiry, inquiryConfigured, mailtoHref } from '../lib/inquiry.ts'
 import { primaryAction, robesAction } from '../lib/styles.ts'
 
 type Choice = { id: string; title: string }
 type Pathway = 'personal' | 'robes'
 
-type FieldName = 'name' | 'organization' | 'email' | 'service' | 'challenge'
+type FieldName = 'name' | 'organization' | 'email' | 'country' | 'service' | 'challenge'
 type Errors = Partial<Record<FieldName, string>>
 
 type FormState = {
   name: string
   organization: string
   email: string
+  country: string
   service: string
   challenge: string
   budget: string
+  timeline: string
   companyWebsite: string
 }
 
@@ -30,6 +34,9 @@ function initialChallenge(service: string | null, intent: string | null) {
   }
   if (service === 'clearrequest' && intent === 'workflow') {
     return 'I would like to discuss a business workflow. The ClearRequest demonstration is close to the visibility we need.'
+  }
+  if (service === 'clearrequest' && intent === 'pilot') {
+    return 'I would like a proposal for a paid pilot of a ClearRequest-style approval workflow, scoped to one operation. I understand the demonstration is not a finished product.'
   }
   if (service === 'waynote' && intent === 'similar') {
     return 'I would like a loading-note solution similar to the Waynote demonstration, adapted to our operation.'
@@ -107,8 +114,9 @@ function validate(values: FormState): Errors {
     errors.organization = 'Enter your business or organization.'
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
-    errors.email = 'Enter a valid email address.'
+    errors.email = 'Enter a valid professional email address.'
   }
+  if (values.country.trim().length < 2) errors.country = 'Enter your country.'
   if (!values.service) errors.service = 'Select the type of service you need.'
   if (values.challenge.trim().length < 20) {
     errors.challenge = 'Describe the challenge in at least a short paragraph.'
@@ -118,15 +126,17 @@ function validate(values: FormState): Errors {
 
 function buildMessage(values: FormState, choices: Choice[], pathway: Pathway) {
   const service = choices.find((choice) => choice.id === values.service)?.title ?? values.service
-  const recipient = pathway === 'robes' ? 'Robes Leadership | Technology' : 'Christopher Agba'
+  const recipient = pathway === 'robes' ? 'Robes Leadership & Technology' : 'Christopher Agba'
   const subject = `${pathway === 'robes' ? 'Robes consultation' : 'Professional inquiry'} from ${values.organization.trim()} — ${service}`
   const body = [
     `Inquiry for: ${recipient}`,
     `Name: ${values.name.trim()}`,
     `Organization: ${values.organization.trim()}`,
     `Email: ${values.email.trim()}`,
+    `Country: ${values.country.trim()}`,
     `Topic: ${service}`,
-    `Budget or timeline: ${values.budget.trim() || 'Not specified'}`,
+    `Budget: ${values.budget.trim() || 'Not specified'}`,
+    `Timeline: ${values.timeline.trim() || 'Not specified'}`,
     '',
     'Challenge:',
     values.challenge.trim(),
@@ -147,9 +157,11 @@ export function ContactForm({
     name: '',
     organization: '',
     email: '',
+    country: '',
     service: initialService(params.get('service'), choices),
     challenge: initialChallenge(params.get('service'), params.get('intent')),
     budget: '',
+    timeline: '',
     companyWebsite: '',
   })
   const [errors, setErrors] = useState<Errors>({})
@@ -157,10 +169,12 @@ export function ContactForm({
   const [copied, setCopied] = useState(false)
   const [copyFailed, setCopyFailed] = useState(false)
   const [blocked, setBlocked] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'delivered' | 'failed'>('idle')
+  const [deliveryError, setDeliveryError] = useState('')
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setValues((current) => ({ ...current, [key]: value }))
-    if (key !== 'budget' && key !== 'companyWebsite' && key in errors) {
+    if (key !== 'budget' && key !== 'timeline' && key !== 'companyWebsite' && key in errors) {
       setErrors((current) => {
         const next = { ...current }
         delete next[key as FieldName]
@@ -169,11 +183,13 @@ export function ContactForm({
     }
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setCopied(false)
     setCopyFailed(false)
     setBlocked(false)
+    setDeliveryError('')
+    setStatus('idle')
 
     if (values.companyWebsite.trim()) {
       setBlocked(true)
@@ -189,11 +205,41 @@ export function ContactForm({
     }
 
     const message = buildMessage(values, choices, pathway)
-    setPrepared({ subject: message.subject, body: message.body })
-    const mailto = `mailto:${site.contact.email}?subject=${encodeURIComponent(message.subject)}&body=${encodeURIComponent(message.body)}`
-    if (mailto.length < 1800) {
-      window.location.href = mailto
+    const payload = {
+      name: values.name.trim(),
+      email: values.email.trim(),
+      organization: values.organization.trim(),
+      country: values.country.trim(),
+      service: values.service,
+      challenge: values.challenge.trim(),
+      budget: values.budget.trim(),
+      timeline: values.timeline.trim(),
+      pathway,
+      subject: message.subject,
+      body: message.body,
     }
+
+    if (inquiryConfigured()) {
+      setStatus('sending')
+      try {
+        const result = await deliverInquiry(payload)
+        if (result !== 'delivered') throw new Error('Inquiry delivery is not configured.')
+        setPrepared(null)
+        setStatus('delivered')
+        track('Inquiry delivered', { pathway })
+      } catch (error) {
+        setStatus('failed')
+        setDeliveryError(error instanceof Error ? error.message : 'The inquiry could not be delivered.')
+        setPrepared({ subject: message.subject, body: message.body })
+        track('Inquiry failed', { pathway })
+      }
+      return
+    }
+
+    setPrepared({ subject: message.subject, body: message.body })
+    track('Inquiry prepared', { pathway })
+    const mailto = mailtoHref(message.subject, message.body)
+    if (mailto.length < 1800) window.location.href = mailto
   }
 
   async function copyMessage() {
@@ -216,20 +262,26 @@ export function ContactForm({
       className="relative space-y-5"
       onSubmit={onSubmit}
       noValidate
-      aria-describedby={pathway === 'robes' ? undefined : `${formId}-note`}
+      aria-describedby={`${formId}-note ${formId}-privacy`}
     >
-      {pathway === 'robes' ? null : (
-        <p id={`${formId}-note`} className="text-sm leading-relaxed text-muted">
-          This inquiry is for Christopher Agba. The message is prepared for {site.contact.email}. This
-          site does not store it. It opens an email for you to send, or to copy if your email app does
-          not open.
-        </p>
-      )}
+      <p id={`${formId}-note`} className="text-sm leading-relaxed text-muted">
+        {inquiryConfigured()
+          ? `This inquiry is sent to ${site.contact.email}. A success message appears only after delivery is accepted.`
+          : `Until direct delivery is configured, this opens an email to ${site.contact.email}. Nothing is delivered until you send that email.`}
+      </p>
+      <p id={`${formId}-privacy`} className="text-sm leading-relaxed text-muted">
+        Privacy: your name, email, organization, country, and project notes are used only to reply.
+        This site does not keep a database of inquiries. They go to {site.contact.email}
+        {inquiryConfigured()
+          ? ', through Web3Forms, which emails them to that address.'
+          : ' when you send the email from your own mail app.'}{' '}
+        Do not include passwords or confidential employer records.
+      </p>
 
       {errorCount > 0 ? (
         <div role="alert" className="border border-danger px-4 py-3 text-sm text-danger">
           Check the {errorCount === 1 ? 'highlighted field' : `${errorCount} highlighted fields`}{' '}
-          before preparing the email.
+          before continuing.
         </div>
       ) : null}
 
@@ -260,15 +312,23 @@ export function ContactForm({
       />
       <Field
         id={`${formId}-organization`}
-        label="Business or organization"
+        label="Company / Organization"
         error={errors.organization}
         value={values.organization}
         autoComplete="organization"
         onChange={(value) => update('organization', value)}
       />
       <Field
+        id={`${formId}-country`}
+        label="Country"
+        error={errors.country}
+        value={values.country}
+        autoComplete="country-name"
+        onChange={(value) => update('country', value)}
+      />
+      <Field
         id={`${formId}-email`}
-        label="Email address"
+        label="Professional email"
         type="email"
         error={errors.email}
         value={values.email}
@@ -278,7 +338,7 @@ export function ContactForm({
 
       <div>
         <label htmlFor={`${formId}-service`} className="mb-2 block text-sm font-medium text-ink">
-          {pathway === 'robes' ? 'Type of solution needed' : 'What do you want to discuss?'}
+          Service Needed
         </label>
         <select
           id={`${formId}-service`}
@@ -304,7 +364,7 @@ export function ContactForm({
 
       <div>
         <label htmlFor={`${formId}-challenge`} className="mb-2 block text-sm font-medium text-ink">
-          Brief description of the challenge
+          Project Description
         </label>
         <textarea
           id={`${formId}-challenge`}
@@ -323,16 +383,49 @@ export function ContactForm({
 
       <Field
         id={`${formId}-budget`}
-        label="Project budget or timeline (optional)"
+        label="Estimated budget (optional)"
         error={undefined}
         value={values.budget}
         onChange={(value) => update('budget', value)}
-        hint="For example: this quarter, or a range you already have in mind."
+        hint="A range is enough. Leave this blank if you do not have one yet."
+      />
+      <Field
+        id={`${formId}-timeline`}
+        label="Project timeline (optional)"
+        error={undefined}
+        value={values.timeline}
+        onChange={(value) => update('timeline', value)}
+        hint="For example: this quarter, or a date you already have in mind."
       />
 
-      <button type="submit" className={pathway === 'robes' ? robesAction : primaryAction}>
-        {pathway === 'robes' ? 'Request a consultation' : 'Prepare email inquiry'}
+      <button
+        type="submit"
+        className={pathway === 'robes' ? robesAction : primaryAction}
+        disabled={status === 'sending'}
+      >
+        {status === 'sending'
+          ? 'Sending…'
+          : inquiryConfigured()
+            ? 'Request a Consultation'
+            : pathway === 'robes'
+              ? 'Request a consultation'
+              : 'Prepare email inquiry'}
       </button>
+
+      {status === 'delivered' ? (
+        <div className="border border-line bg-paper-2 p-5" role="status">
+          <h3 className="font-serif text-2xl text-ink">Your inquiry was delivered</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted">
+            It reached the inbox for {site.contact.email}. Christopher reads it and replies directly.
+          </p>
+        </div>
+      ) : null}
+
+      {status === 'failed' ? (
+        <p role="alert" className="border border-danger px-4 py-3 text-sm text-danger">
+          {deliveryError} The message below was not delivered. Use it to email {site.contact.email} yourself.
+        </p>
+      ) : null}
 
       {prepared ? (
         <div className="border border-line bg-paper-2 p-5" aria-live="polite">

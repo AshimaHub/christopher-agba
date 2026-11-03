@@ -78,7 +78,7 @@ function Guide({ billed, yard, goods }: { billed: number; yard: number; goods: s
   }
   if (step === 4) {
     title = 'Imagine this level of visibility and control in your organization.'
-    text = 'Robes Leadership | Technology helps businesses design software solutions tailored to their operational challenges.'
+    text = 'Robes Leadership & Technology helps businesses design software solutions tailored to their operational challenges.'
   }
 
   return (

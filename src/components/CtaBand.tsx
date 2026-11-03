@@ -21,6 +21,9 @@ export function CtaBand() {
           <Link to="/contact" className={bandAction}>
             {site.ctas.finalButton}
           </Link>
+          <Link to="/work" className="text-sm text-band-ink underline underline-offset-4">
+            View My Work
+          </Link>
           <a className="text-sm text-band-ink underline underline-offset-4" href={`mailto:${site.contact.email}`}>
             {site.contact.email}
           </a>

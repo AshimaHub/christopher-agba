@@ -2,92 +2,156 @@ import { Link } from 'react-router-dom'
 import { Container } from '../components/Layout.tsx'
 import { PageIntro } from '../components/PageIntro.tsx'
 import { Seo } from '../components/Seo.tsx'
-import { robesAction, secondaryAction } from '../lib/styles.ts'
+import { robesAction, secondaryAction, textLink } from '../lib/styles.ts'
 
-const capabilities = [
-  'A requester submits materials, quantities, and a reason against a project.',
-  'An approver sees the queue and approves or rejects with a note.',
-  'A storekeeper issues all or part of an approved request, and stock stays in balance.',
-  'Status, history, and simple reports update from the same records.',
+const customers = [
+  'Construction and engineering teams that request materials for a job',
+  'Distribution and logistics operations with a store and an approver',
+  'Growing companies whose requests still live in chat, paper, or email',
 ]
 
-const industries = ['Construction', 'Manufacturing', 'Distribution', 'Logistics', 'Growing SMEs']
+const capabilities = [
+  'Submit a request with the materials, quantities, and a reason',
+  'Approve or reject it in writing, so the decision has an owner',
+  'Issue all or part of an approved request, without issuing a rejection',
+  'See status, history, and a simple report from the same record',
+]
+
+const benefits = [
+  'A manager can see what is waiting without calling the store',
+  'Stores issue only what was approved',
+  'The trail of the request does not depend on one person’s messages',
+]
+
+const experience = [
+  'Choose one of four fictional sample businesses',
+  'Act as requester, approver, or storekeeper',
+  'Follow a short guided path, or explore the screens freely',
+  'Reset the sample at any time. Nothing is saved to a server',
+]
 
 export function ClearRequestPage() {
   return (
     <>
       <Seo
-        title="Material requisition software demo · ClearRequest"
-        description="Watch a material request get approved and issued from the store. Try the live ClearRequest demo, then ask Robes to build the same workflow for your business."
+        title="ClearRequest · Workflow and approval demonstration"
+        description="ClearRequest is a working demonstration of material requests, multilevel approval, and store issue. Records are fictional. Ask Christopher Agba about an implementation for your operation."
         path="/robes/solutions/clearrequest"
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'WebPage',
-          name: 'Material requisition software demo',
-          description: 'A live demonstration of requesting materials, approving them, and issuing them from the store.',
+          name: 'ClearRequest',
+          description: 'A working demonstration of requesting materials, approving them, and issuing them from the store.',
         }}
       />
-      <PageIntro eyebrow="ClearRequest" title="Approve the request before the store issues it.">
-        <p>A requester asks. An approver decides. The store issues what was approved, including a partial issue.</p>
-        <p>The demo is not one company. Choose construction, distribution, manufacturing, or logistics. The steps stay the same.</p>
-        <p>Try that path now. If it matches how your business works, request the same module.</p>
+      <PageIntro eyebrow="Flagship demonstration" title="ClearRequest keeps a request visible until it is decided and issued.">
+        <p>
+          Internal requests get lost when they live in inboxes. ClearRequest is the working model of
+          a better path: someone asks, someone decides, and the store issues only what was approved.
+        </p>
+        <p>
+          This is a portfolio demonstration with fictional businesses and fictional records. It is
+          not a client result, and it does not claim measured savings.
+        </p>
       </PageIntro>
-      <Container className="grid gap-10 py-16 md:py-20">
-        <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <p className="text-sm leading-relaxed text-muted">
-              Digitize material requests, streamline approvals, and manage fulfilment with greater
-              visibility and accountability.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link to="/robes/demo/clearrequest" className={robesAction}>
-                Try the live demo
-              </Link>
-              <Link to="/robes/contact?service=clearrequest&intent=similar" className={secondaryAction}>
-                Request this for your business
-              </Link>
-            </div>
-          </div>
-          <Preview />
+      <Container className="grid gap-12 py-16 md:py-20">
+        <div className="flex flex-wrap gap-3">
+          <Link to="/robes/demo/clearrequest" className={robesAction}>Try the live demo</Link>
+          <Link to="/robes/contact?service=clearrequest&intent=similar" className={secondaryAction}>Request a Consultation</Link>
+          <Link to="/contact" className={secondaryAction}>Discuss Your Project</Link>
         </div>
 
-        <section className="grid gap-6 border-t border-line pt-10 md:grid-cols-2">
+        <section className="grid gap-8 border-t border-line pt-10 md:grid-cols-2">
           <div>
-            <h2 className="font-serif text-3xl text-ink">The problem</h2>
+            <h2 className="font-serif text-3xl text-ink">The business problem</h2>
             <p className="mt-4 text-muted">
-              Material requests get lost in chat and paper. A manager cannot see what is waiting,
-              and stores can issue something that was never approved. The demonstration shows one
-              record moving through request, decision, and issue.
+              A material request that sits in chat has no status. A manager cannot see what is
+              waiting. A store can issue something that was never approved, or wait because nobody
+              can find the decision.
             </p>
           </div>
           <div>
-            <h2 className="font-serif text-3xl text-ink">What you can try</h2>
+            <h2 className="font-serif text-3xl text-ink">Who it is for</h2>
             <ul className="mt-4 space-y-3 text-muted">
-              {capabilities.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
+              {customers.map((item) => <li key={item}>{item}</li>)}
             </ul>
           </div>
         </section>
 
-        <section className="grid gap-6 border-t border-line pt-10 md:grid-cols-2">
+        <section className="grid gap-8 border-t border-line pt-10 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <h2 className="font-serif text-3xl text-ink">Industries</h2>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {industries.map((item) => (
-                <li key={item} className="border border-line px-3 py-2 text-sm">
-                  {item}
-                </li>
-              ))}
+            <h2 className="font-serif text-3xl text-ink">Key capabilities</h2>
+            <ul className="mt-4 space-y-3 text-muted">
+              {capabilities.map((item) => <li key={item}>{item}</li>)}
+            </ul>
+            <h2 className="mt-10 font-serif text-3xl text-ink">Business benefits</h2>
+            <ul className="mt-4 space-y-3 text-muted">
+              {benefits.map((item) => <li key={item}>{item}</li>)}
             </ul>
           </div>
-          <div>
-            <h2 className="font-serif text-3xl text-ink">Built with</h2>
-            <p className="mt-4 text-muted">
-              React, TypeScript, and data stored in this browser. There is no account and no shared
-              database. Resetting the demo restores the sample for the business you picked.
-            </p>
+          <Preview />
+        </section>
+
+        <section className="border-t border-line pt-10">
+          <h2 className="font-serif text-3xl text-ink">How an organization commissions it</h2>
+          <ol className="mt-6 grid gap-4 md:grid-cols-5">
+            {[
+              ['1', 'Explore', 'Read the problem this workflow is meant to solve.', '/robes/solutions/clearrequest'],
+              ['2', 'Experience', 'Try the fictional demonstration.', '/robes/demo/clearrequest'],
+              ['3', 'Discuss', 'Describe how requests move in your business.', '/robes/contact?service=clearrequest&intent=workflow'],
+              ['4', 'Proposal', 'Receive a scope before any build starts.', '/robes/contact?service=clearrequest&intent=similar'],
+              ['5', 'Paid pilot', 'A bounded build for one operation, if the proposal fits.', '/robes/contact?service=clearrequest&intent=pilot'],
+            ].map(([step, title, text, to]) => (
+              <li key={step} className="border border-line p-4">
+                <p className="text-xs font-medium tracking-[0.14em] text-accent uppercase">{step}</p>
+                <h3 className="mt-2 font-medium text-ink">{title}</h3>
+                <p className="mt-2 text-sm text-muted">{text}</p>
+                <Link to={to} className={`${textLink} mt-3 inline-flex text-sm`}>Continue</Link>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-4 max-w-3xl text-sm text-muted">
+            A paid pilot is a commissioned implementation of this kind of workflow. ClearRequest is not a commercially deployed subscription product.
+          </p>
+        </section>
+
+        <section className="border-t border-line pt-10">
+          <h2 className="font-serif text-3xl text-ink">Implementation process</h2>
+          <ol className="mt-4 max-w-3xl space-y-3 text-muted">
+            <li>Confirm the request, the approver, and what the store is allowed to issue.</li>
+            <li>Agree the records, roles, and what is out of scope.</li>
+            <li>Build the path on your data, not on the fictional sample businesses.</li>
+            <li>Test the request, decision, and issue with the people who will use it.</li>
+            <li>Hand over the system with a support period written into the proposal.</li>
+          </ol>
+        </section>
+
+        <section className="border-t border-line pt-10">
+          <h2 className="font-serif text-3xl text-ink">What you can experience in the demo</h2>
+          <ul className="mt-4 max-w-3xl space-y-3 text-muted">
+            {experience.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+          <p className="mt-4 max-w-3xl text-sm text-muted">
+            The demonstration runs in your browser. There is no account. Implementation for a real
+            operation is a separate conversation, scoped to that business.
+          </p>
+        </section>
+
+        <section className="border border-line bg-card p-6 sm:p-8">
+          <h2 className="font-serif text-3xl text-ink">Ask about an implementation</h2>
+          <p className="mt-4 max-w-3xl text-muted">
+            If this path matches how your organization requests and issues materials, the next step
+            is a consultation and, if it fits, a written proposal for a paid pilot. The inquiry is
+            delivered only when the form confirms it, or when you send the email yourself.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link to="/robes/contact?service=clearrequest&intent=pilot" className={robesAction}>Request a paid pilot</Link>
+            <Link to="/robes/contact?service=clearrequest&intent=similar" className={secondaryAction}>Request a Consultation</Link>
+            <Link to="/work" className={secondaryAction}>View My Work</Link>
           </div>
+          <p className="mt-6 text-sm text-muted">
+            <Link to="/services" className={textLink}>See the services you can hire</Link>
+          </p>
         </section>
       </Container>
     </>
@@ -101,26 +165,11 @@ function Preview() {
         <p className="font-serif text-xl text-ink">ClearRequest</p>
         <p className="text-xs tracking-wide text-robes uppercase">Pending</p>
       </div>
-      <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-        <PreviewStat value="2" label="Waiting" />
-        <PreviewStat value="1" label="To issue" />
-        <PreviewStat value="2" label="Done" />
-      </div>
       <div className="mt-4 space-y-2 text-sm">
-        <PreviewRow code="Harbour Works" label="Construction" />
-        <PreviewRow code="Mile 12 Provisions" label="Distribution" />
-        <PreviewRow code="Lekki Stitch" label="Manufacturing" />
-        <PreviewRow code="Sahel Haulage" label="Logistics" />
+        <PreviewRow code="Requested" label="Waiting for a decision" />
+        <PreviewRow code="Approved" label="Ready for the store" />
+        <PreviewRow code="Issued" label="Recorded against stock" />
       </div>
-    </div>
-  )
-}
-
-function PreviewStat({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="border border-line px-2 py-3">
-      <p className="font-serif text-2xl text-ink">{value}</p>
-      <p className="text-xs text-muted">{label}</p>
     </div>
   )
 }

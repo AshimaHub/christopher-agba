@@ -88,7 +88,7 @@ body {
   background-color: var(--paper);
   background-image:
     linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 20rem),
-    radial-gradient(980px 560px at -6% -10%, rgba(27, 122, 69, 0.28), transparent 58%),
+    radial-gradient(980px 560px at -6% -10%, rgba(26, 69, 120, 0.22), transparent 58%),
     radial-gradient(760px 480px at 108% 0%, rgba(226, 206, 164, 0.55), transparent 52%),
     radial-gradient(720px 460px at 74% 112%, rgba(27, 122, 69, 0.2), transparent 54%),
     radial-gradient(480px 340px at 16% 78%, rgba(176, 204, 188, 0.4), transparent 52%),
@@ -101,7 +101,7 @@ body {
   background-color: var(--paper);
   background-image:
     linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 16rem),
-    radial-gradient(980px 600px at -8% -10%, rgba(27, 122, 69, 0.46), transparent 56%),
+    radial-gradient(980px 600px at -8% -10%, rgba(26, 69, 120, 0.42), transparent 56%),
     radial-gradient(760px 500px at 112% 4%, rgba(90, 150, 210, 0.2), transparent 52%),
     radial-gradient(860px 540px at 70% 112%, rgba(16, 92, 52, 0.55), transparent 55%),
     radial-gradient(460px 320px at 14% 74%, rgba(183, 228, 196, 0.12), transparent 50%),
@@ -318,6 +318,43 @@ body {
   to {
     opacity: 0;
     transform: translateY(52%) rotateX(48deg);
+  }
+}
+
+.demo-reel {
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.demo-reel::-webkit-scrollbar {
+  display: none;
+}
+
+.reel-control {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-line);
+  background: var(--color-card);
+  padding-inline: 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.reel-control-icon {
+  width: 2.75rem;
+  padding-inline: 0;
+}
+
+.reel-control:hover {
+  border-color: var(--color-robes-fill);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-reel {
+    scroll-behavior: auto;
   }
 }
 

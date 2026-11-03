@@ -10,7 +10,7 @@ export function RobesLeadershipPage() {
     <>
       <Seo
         title={`Leadership direction · ${robes.name}`}
-        description="The leadership vision of Robes Leadership | Technology. These areas are a direction for the brand, not programmes currently offered for sale."
+        description="The leadership vision of Robes Leadership & Technology. These areas are a direction for the brand, not programmes currently offered for sale."
         path="/robes/leadership"
       />
       <PageIntro eyebrow="Leadership" title="A direction for the brand, not a catalogue you can buy.">

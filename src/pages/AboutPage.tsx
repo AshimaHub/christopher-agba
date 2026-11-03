@@ -4,7 +4,7 @@ import { Container } from '../components/Layout.tsx'
 import { PageIntro } from '../components/PageIntro.tsx'
 import { Portrait } from '../components/Portrait.tsx'
 import { Seo } from '../components/Seo.tsx'
-import { site } from '../content/site.ts'
+import { personJsonLd, site } from '../content/site.ts'
 import { robesLink, textLink } from '../lib/styles.ts'
 
 export function AboutPage() {
@@ -12,8 +12,9 @@ export function AboutPage() {
     <>
       <Seo
         title={`About · ${site.name}`}
-        description="Christopher Agba is an enterprise software engineer and business systems consultant based in Abuja, Nigeria."
+        description="Christopher Agba is an enterprise software engineer, AI and business automation specialist, and technology founder based in Abuja, Nigeria."
         path="/about"
+        jsonLd={personJsonLd()}
       />
       <PageIntro eyebrow="Christopher Agba" title="The person behind the systems.">
         <p>
@@ -36,14 +37,26 @@ export function AboutPage() {
           {site.about.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
+          <section>
+            <h2 className="font-serif text-3xl text-ink">Engineering approach</h2>
+            <p className="mt-3">{site.about.approach}</p>
+          </section>
+          <section>
+            <h2 className="font-serif text-3xl text-ink">Leadership philosophy</h2>
+            <p className="mt-3">{site.about.leadership}</p>
+          </section>
+          <section>
+            <h2 className="font-serif text-3xl text-ink">Career direction and founder vision</h2>
+            <p className="mt-3">{site.about.direction}</p>
+          </section>
           <p>
-            <Link to="/solutions#process" className={textLink}>
+            <Link to="/services" className={textLink}>
               See how an engagement works
             </Link>
           </p>
           <p>
             <Link to="/robes" className={robesLink}>
-              Robes Leadership | Technology
+              Robes Leadership & Technology
             </Link>
           </p>
         </div>
@@ -54,8 +67,8 @@ export function AboutPage() {
             Technical expertise
           </h2>
           <p className="mt-4 max-w-2xl text-muted">
-            The first three groups are the core of my client work. The last group is broader
-            background, not a separate service line.
+            PHP, MySQL, and enterprise operational systems are the confirmed base. AI and
+            source-grounded assistants are a direction being designed, not a list of delivered products.
           </p>
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
             {site.expertise.map((group) => (

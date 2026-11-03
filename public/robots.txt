@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://christopher-agba.onrender.com/sitemap.xml

@@ -36,7 +36,7 @@ export type Service = {
 
 export const site = {
   name: 'Christopher Agba',
-  role: 'Enterprise Software Engineer | Business Systems & Automation Consultant',
+  role: 'Enterprise Software Engineer | AI & Business Automation Specialist | Technology Founder',
   shortRole: 'Enterprise Software Engineer',
   location: 'Abuja, Nigeria',
   /** Portrait served from /public. Replace the file, or change this path. */
@@ -47,21 +47,22 @@ export const site = {
    */
   siteUrl: 'https://christopher-agba.onrender.com',
   valueProposition:
-    'I help businesses simplify complex operations, automate inefficient processes, and build reliable software systems that improve productivity and support growth.',
+    "I don't just write software. I engineer intelligent systems that solve business problems, automate operations, and help organizations scale.",
   hero: {
-    title: 'Build and Automate Custom Business Systems',
+    title: 'I Build Intelligent Software That Helps Businesses Operate Better.',
     support:
-      'Try a live workflow before you ask for one. A material request, a loading note, an expense sheet, a stock card, hired-machine hours, a payee list, a fuel issue, a morning machine board, a shift close, a waiting inbox, a repair log, or a supplier bill — then request the same path for your business.',
+      "I'm Christopher Agba, an Enterprise Software Engineer and AI Automation Specialist. I design and build intelligent business applications that simplify complex workflows, improve operational visibility, and help organizations work smarter.",
+    positioning: 'Enterprise Software • AI Automation • Business Systems',
     availability: 'Based in Abuja, Nigeria. Open to organizations in Nigeria and internationally.',
   },
   ctas: {
     nav: 'Discuss Your Project',
     primary: 'Discuss Your Project',
     secondary: 'Explore My Work',
-    finalTitle: "Have a Business Challenge? Let's Build the Right Solution.",
+    finalTitle: 'Have a Business Problem Technology Could Solve?',
     finalText:
-      'Tell me what is slowing the operation down, or what your engineering team needs delivered. I will reply with a practical next step.',
-    finalButton: "Let's Talk Business",
+      "Let's explore how intelligent software, automation, and well-designed business systems can improve your operations.",
+    finalButton: 'Discuss Your Project',
   },
   contact: {
     email: 'agbachris555@gmail.com',
@@ -79,16 +80,28 @@ export const site = {
   },
   audiences: [
     {
-      title: 'Businesses with operational complexity',
-      text: 'Construction and engineering firms, logistics and distribution companies, and growing organizations that still depend on manual approvals, spreadsheets, or software staff have to work around.',
-      href: '/solutions',
-      action: 'See business solutions',
+      title: 'Growing businesses and SMEs',
+      text: 'Companies that have outgrown spreadsheets and need software shaped around the way work actually moves.',
     },
     {
-      title: 'Technology teams that need a backend partner',
-      text: 'Startups, software agencies, and engineering groups that need help with APIs, integrations, modernization, or steady backend delivery.',
-      href: '/solutions#backend-engineering-partnerships',
-      action: 'See engineering partnerships',
+      title: 'Construction and engineering businesses',
+      text: 'Teams that need clearer records for materials, equipment, approvals, and what happened on site.',
+    },
+    {
+      title: 'Logistics and distribution companies',
+      text: 'Operations that need a reliable handoff from request, to movement, to what was actually received.',
+    },
+    {
+      title: 'Organizations with complex administrative workflows',
+      text: 'Approvals, expenses, and internal requests that still live in inboxes and chat.',
+    },
+    {
+      title: 'Enterprises seeking AI integration',
+      text: 'Teams that want staff to find answers in their own documents, with the source visible. This is a direction I am prepared to design. It is not a product already in production here.',
+    },
+    {
+      title: 'Businesses modernizing legacy processes',
+      text: 'Organizations that need an existing system to become easier to use and safer to change.',
     },
   ],
   problems: [
@@ -263,13 +276,33 @@ export const site = {
     paragraphs: [
       'I studied Computer Science and have hands-on experience developing and maintaining enterprise business applications. That work includes construction and operational systems, workflow management, databases, operational reporting, and business automation.',
       'The tools I use in that work include PHP, MySQL, APIs, and the practical job of modernizing systems that are already part of how a company runs. I am interested in the organization as well as the code. A useful system has to fit the way people approve work, keep records, and answer questions from leadership.',
-      'I am also interested in technology leadership and in building software products over time. Robes Leadership | Technology is the business brand I am developing for that work. RobesAPI, an API platform concept, belongs to that longer direction. It is not a product you can buy today. Clients hire me to solve an operational or engineering problem and to leave behind software that can be maintained.',
+      'I am building toward technology leadership and a company that can deliver this work beyond one person. Robes Leadership & Technology (RL&T) is that emerging brand. It is not presented here as a registered company or a large team. RobesAPI, an API platform concept, belongs to that longer direction. It is not a product you can buy today.',
     ],
+    approach:
+      'I start with the business problem: who is waiting, what record is missing, and what decision cannot be seen. The software follows that path. Scope stays explicit, and the result has to be something another developer can maintain.',
+    leadership:
+      'Leadership, for me, is judgment about what the organization is ready to change. I would rather narrow a system than promise a platform the team cannot run. The leadership practice under RL&T is a direction. It is not a catalogue of courses or retainers.',
+    direction:
+      'The next technical step is intelligent automation: workflow systems that already have a record, then assistants that answer from an organization’s own documents and show the source. KnowledgeDesk is that concept. It is not a deployed product on this site.',
   },
   expertise: [
     {
-      title: 'Application development',
-      items: ['PHP', 'MySQL', 'Enterprise web applications', 'Internal operational tools'],
+      title: 'Enterprise software engineering',
+      items: [
+        'Applications for complex operations',
+        'Workflow and approval systems',
+        'ERP-style business applications',
+        'PHP, MySQL, and database-backed records',
+      ],
+    },
+    {
+      title: 'AI and intelligent automation',
+      items: [
+        'Business process automation',
+        'Operational reporting and dashboards',
+        'Source-grounded knowledge assistants (a design direction, not a live product here)',
+        'Retrieval-augmented generation as an approach I am prepared to engineer',
+      ],
     },
     {
       title: 'Business systems',
@@ -369,8 +402,10 @@ export const site = {
 }
 
 export const navigation = [
+  { label: 'About', to: '/about' },
   { label: 'Solutions', to: '/solutions' },
-  { label: 'Selected Work', to: '/work' },
+  { label: 'Case Studies', to: '/work' },
+  { label: 'Services', to: '/services' },
   { label: 'Contact', to: '/contact' },
 ] as const
 

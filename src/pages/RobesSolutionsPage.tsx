@@ -11,7 +11,7 @@ export function RobesSolutionsPage() {
     <>
       <Seo
         title={`Material requests, loading notes, expenses, stock, hire hours, payees, fuel, fleet, shift close, a waiting inbox, a repair log, and a bill check · ${robes.name}`}
-        description="Try a live demo of material requisitions, loading notes, expense approval, a stock ledger, plant hire hours, a payee register, fuel issues, a morning fleet board, a shift close, a waiting inbox, a repair log, or a supplier bill check. Then ask Robes Leadership | Technology to build that workflow for your business."
+        description="Try a live demo of material requisitions, loading notes, expense approval, a stock ledger, plant hire hours, a payee register, fuel issues, a morning fleet board, a shift close, a waiting inbox, a repair log, or a supplier bill check. Then ask Robes Leadership & Technology to build that workflow for your business."
         path="/robes/solutions"
       />
       <PageIntro eyebrow="Technology" title="Try the workflow. Then ask for it in your business.">

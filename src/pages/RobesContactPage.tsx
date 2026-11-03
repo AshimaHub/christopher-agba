@@ -13,7 +13,7 @@ export function RobesContactPage() {
     <>
       <Seo
         title={`Contact Robes · ${robes.name}`}
-        description="Request a consultation with Robes Leadership | Technology about business software, integrations, or an operational challenge."
+        description="Request a consultation with Robes Leadership & Technology about business software, integrations, or an operational challenge."
         path="/robes/contact"
       />
       <PageIntro eyebrow="Work with Robes" title="Discuss your business challenge.">

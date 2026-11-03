@@ -70,7 +70,10 @@ function RobesLogoImage({
     <span className={`inline-flex ${className}`}>
       <img
         src={src}
-        alt="Robes Leadership | Technology"
+        alt="Robes Leadership & Technology"
+        width={240}
+        height={96}
+        decoding="async"
         className="h-full w-auto max-w-full object-contain object-left"
         onError={() => setFailed(true)}
       />

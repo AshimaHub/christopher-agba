@@ -29,6 +29,7 @@ export function DemoShell({
   businessName,
   businessLine,
   backTo,
+  inquire,
   links,
   roleId,
   roles,
@@ -49,6 +50,7 @@ export function DemoShell({
   businessName: string
   businessLine: string
   backTo: string
+  inquire?: { to: string; label: string }
   links: DemoLink[]
   roleId: string
   roles: DemoRoleOption[]
@@ -107,9 +109,16 @@ export function DemoShell({
             </NavLink>
           ))}
         </nav>
-        <Link to={backTo} className="mt-auto px-5 py-5 text-sm text-white/70 underline-offset-4 hover:text-white hover:underline">
-          Back to the showcase
-        </Link>
+        <div className="mt-auto grid gap-1 px-5 py-5">
+          {inquire ? (
+            <Link to={inquire.to} className="text-sm font-medium text-white underline-offset-4 hover:underline">
+              {inquire.label}
+            </Link>
+          ) : null}
+          <Link to={backTo} className="text-sm text-white/70 underline-offset-4 hover:text-white hover:underline">
+            Back to the showcase
+          </Link>
+        </div>
       </aside>
       {open ? (
         <button type="button" className="cr-no-print fixed inset-0 z-20 bg-black/45 md:hidden" aria-label="Close menu" onClick={() => setOpen(false)} />
