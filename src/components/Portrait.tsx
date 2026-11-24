@@ -26,8 +26,8 @@ export function Portrait({ alt, className = '', priority = false }: PortraitProp
     <img
       src={site.portrait}
       alt={alt}
-      width={800}
-      height={1067}
+      width={819}
+      height={1024}
       decoding="async"
       loading={priority ? 'eager' : 'lazy'}
       fetchPriority={priority ? 'high' : 'auto'}

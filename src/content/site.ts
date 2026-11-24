@@ -40,7 +40,7 @@ export const site = {
   shortRole: 'Enterprise Software Engineer',
   location: 'Abuja, Nigeria',
   /** Portrait served from /public. Replace the file, or change this path. */
-  portrait: '/images/christopher-agba.jpg',
+  portrait: '/images/christopher-agba.jpg?v=2',
   /**
    * Public site URL for canonical and social metadata.
    * Public address of this site. Used for canonical and social metadata.
