@@ -1,8 +1,8 @@
 import { useState, type ReactNode } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import type { CompanyId } from '../content/demoCompanies.ts'
+import { operationsModules } from '../content/operationsApp.ts'
 import { SampleBusiness } from './SampleBusiness.tsx'
-import { ThemeToggle } from './ThemeToggle.tsx'
 
 export type DemoLink = {
   to: string
@@ -67,6 +67,9 @@ export function DemoShell({
 }) {
   const [open, setOpen] = useState(false)
   const [noticesOpen, setNoticesOpen] = useState(false)
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const workflow = operationsModules.find((item) => pathname.startsWith(item.to))?.to ?? operationsModules[0].to
   const unread = notices.filter((notice) => !notice.read).length
   const initials = actorName
     .split(' ')
@@ -124,14 +127,29 @@ export function DemoShell({
         <button type="button" className="cr-no-print fixed inset-0 z-20 bg-black/45 md:hidden" aria-label="Close menu" onClick={() => setOpen(false)} />
       ) : null}
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="cr-no-print relative z-20 flex flex-wrap items-center gap-3 border-b border-black/5 bg-white/75 px-3 py-2.5 backdrop-blur-xl sm:px-5 dark:border-white/10 dark:bg-[#0c1c16]/80">
+        <header className="cr-no-print relative z-20 flex flex-wrap items-center gap-3 border-b border-line bg-paper/85 px-3 py-2.5 backdrop-blur-xl sm:px-5 dark:border-white/10 dark:bg-[#0c1c16]/80">
           <button
             type="button"
-            className="inline-flex h-10 items-center rounded-xl border border-line bg-white/70 px-3 text-sm md:hidden dark:bg-white/5"
+            className="inline-flex h-10 items-center rounded-xl border border-line bg-paper-2 px-3 text-sm md:hidden dark:bg-white/5"
             onClick={() => setOpen(true)}
           >
             Menu
           </button>
+          <label className="flex min-w-0 items-center gap-2 text-sm">
+            <span className="shrink-0 text-muted">Workflow</span>
+            <select
+              className="h-10 max-w-44 rounded-full border border-line bg-paper-2 px-3 text-sm text-ink sm:max-w-56"
+              aria-label="Workflow in this application"
+              value={workflow}
+              onChange={(event) => navigate(event.target.value)}
+            >
+              {operationsModules.map((item) => (
+                <option key={item.to} value={item.to}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </label>
           <div className="flex rounded-full bg-black/5 p-1 dark:bg-white/10" role="radiogroup" aria-label="Demo role, not a login">
             {roles.map((role) => (
               <button
@@ -151,7 +169,7 @@ export function DemoShell({
             <div className="relative">
               <button
                 type="button"
-                className="relative grid h-10 w-10 place-items-center rounded-full border border-line bg-white/80 text-ink dark:bg-white/5"
+                className="relative grid h-10 w-10 place-items-center rounded-full border border-line bg-paper-2 text-ink dark:bg-white/5"
                 aria-expanded={noticesOpen}
                 aria-label={unread > 0 ? `Notices, ${unread} unread` : 'Notices'}
                 onClick={() => {
@@ -167,7 +185,7 @@ export function DemoShell({
                 ) : null}
               </button>
               {noticesOpen ? (
-                <div className="absolute right-0 z-30 mt-2 w-80 rounded-2xl border border-line bg-white p-3 text-ink shadow-xl dark:bg-[#102018]">
+                <div className="blend-panel absolute right-0 z-30 mt-2 w-80 rounded-2xl p-3 text-ink dark:border dark:border-white/10 dark:bg-[#102018]">
                   <p className="px-2 pb-2 text-xs font-semibold tracking-wide text-muted uppercase">Notices</p>
                   <ul className="max-h-72 space-y-2 overflow-auto">
                     {notices.slice(0, 6).map((notice) => (
@@ -179,7 +197,6 @@ export function DemoShell({
                 </div>
               ) : null}
             </div>
-            <ThemeToggle />
             <button
               type="button"
               className="h-10 rounded-full px-3 text-sm text-muted hover:text-ink"
@@ -189,7 +206,7 @@ export function DemoShell({
             >
               Reset
             </button>
-            <span className="hidden items-center gap-2 rounded-full border border-line bg-white/80 py-1 pr-3 pl-1 sm:inline-flex dark:bg-white/5">
+            <span className="hidden items-center gap-2 rounded-full border border-line bg-paper-2 py-1 pr-3 pl-1 sm:inline-flex dark:bg-white/5">
               <span className="grid h-8 w-8 place-items-center rounded-full bg-[#1b7a45] text-xs font-semibold text-white">
                 {initials}
               </span>

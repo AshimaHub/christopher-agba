@@ -322,10 +322,6 @@ export const site = {
         'Maintenance and support',
       ],
     },
-    {
-      title: 'Also part of my background',
-      items: ['Computer Science', 'Networking', 'UI/UX design with Figma', 'Technical problem-solving'],
-    },
   ],
   caseStudies: [
     {

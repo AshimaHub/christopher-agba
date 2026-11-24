@@ -86,7 +86,7 @@ function Guide() {
   }
 
   return (
-    <section className="cr-no-print rounded-2xl border border-[#cfe3d6] bg-white/85 p-4 shadow-sm dark:border-white/10 dark:bg-white/6">
+    <section className="cr-no-print rounded-2xl border border-line bg-paper-2 p-4 shadow-sm dark:border-white/10 dark:bg-white/6">
       <p className="text-xs font-medium tracking-[0.14em] text-robes uppercase">Guided demonstration</p>
       <h2 className="mt-1 text-lg font-semibold text-ink">{title}</h2>
       <p className="mt-2 max-w-3xl text-sm text-muted">{text}</p>

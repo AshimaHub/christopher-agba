@@ -156,23 +156,22 @@ export function HomePage() {
   return (
     <>
       <Seo
-        title={`${site.name} · Enterprise Software and AI Automation`}
-        description={site.hero.support}
+        title={`${robes.name} · ${robes.proposition}`}
+        description={`${robes.proposition} ${robes.mission}`}
         path="/"
         jsonLd={{
           '@context': 'https://schema.org',
-          '@type': 'ProfilePage',
-          name: site.name,
-          description: site.valueProposition,
+          '@type': 'Organization',
+          name: robes.name,
+          description: robes.proposition,
+          founder: { '@type': 'Person', name: site.name },
         }}
       />
       <Hero />
-      <Value />
+      <SystemField />
       <Featured />
       <Audiences />
-      <Expertise />
       <AboutPreview />
-      <Demos />
       <Close />
     </>
   )
@@ -181,29 +180,19 @@ export function HomePage() {
 function Hero() {
   return (
     <section className="border-b border-line">
-      <Container className="grid items-center gap-10 py-12 lg:grid-cols-[1.15fr_0.85fr] lg:py-16">
-        <div>
-          <p className="text-sm font-medium tracking-[0.14em] text-accent uppercase">{site.hero.positioning}</p>
-          <h1 className="mt-4 max-w-3xl font-serif text-[clamp(2.4rem,5vw,4.1rem)] leading-[1.05] font-bold tracking-[-0.03em] text-ink">
-            {site.hero.title}
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{site.hero.support}</p>
-          <p className="mt-4 text-sm text-muted">{site.name} · {site.role}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link to="/solutions" className={robesAction}>Explore My Solutions</Link>
-            <Link to="/contact" className={secondaryAction}>Discuss Your Project</Link>
-          </div>
+      <Container className="py-14 lg:py-20">
+        <p className="text-sm font-medium tracking-[0.14em] text-robes uppercase">{robes.name}</p>
+        <h1 className="mt-4 max-w-5xl font-serif text-[clamp(2.6rem,5.4vw,4.6rem)] leading-[1.02] font-bold tracking-[-0.03em] text-ink">
+          {robes.proposition}
+        </h1>
+        <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
+          {robes.mission} Open the application and try every workflow: requests, stores, plant, fleet, fuel, repairs, and supplier bills. The records are fictional.
+        </p>
+        <p className="mt-4 max-w-3xl text-sm text-muted">{robes.status}</p>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Link to="/app" className={robesAction}>Open the application</Link>
+          <Link to="/robes/contact" className={secondaryAction}>Request a Consultation</Link>
         </div>
-        <figure>
-          <Portrait
-            alt="Portrait of Christopher Agba"
-            priority
-            className="aspect-[4/5] w-full max-w-md border border-line lg:ml-auto"
-          />
-          <figcaption className="mt-3 max-w-md text-sm text-muted lg:ml-auto">
-            {site.name} · {site.location}. {robes.shortName} is the emerging company brand.
-          </figcaption>
-        </figure>
       </Container>
     </section>
   )
@@ -216,25 +205,60 @@ const capabilities = [
   { title: 'Systems & API Integration', text: 'Connecting applications, data, and services into dependable business solutions.' },
 ]
 
+function SystemField() {
+  return (
+    <section className="system-field" aria-label="Business problems and the application that works through them">
+      <div className="system-field-mesh" aria-hidden="true" />
+      <Value />
+      <FlowMark />
+      <Demos />
+    </section>
+  )
+}
+
+function FlowMark() {
+  return (
+    <div className="relative z-10 mx-auto w-full max-w-6xl px-5 sm:px-8">
+      <svg className="system-flow" viewBox="0 0 960 92" aria-hidden="true">
+        <g fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M40 16c150 8 250 28 400 30" />
+          <path d="M40 46c160 0 260 0 400 0" />
+          <path d="M40 76c150-8 250-28 400-30" />
+          <path d="M520 46c130-18 230-18 400-24" />
+          <path d="M520 46c140 8 240 16 400 22" />
+        </g>
+        <polygon points="500,28 522,40 522,64 500,76 478,64 478,40" fill="#0c1e33" stroke="currentColor" strokeWidth="1.6" />
+        <circle cx="500" cy="52" r="4" fill="currentColor" />
+        <circle cx="40" cy="16" r="3.5" fill="currentColor" />
+        <circle cx="40" cy="46" r="3.5" fill="currentColor" />
+        <circle cx="40" cy="76" r="3.5" fill="currentColor" />
+        <circle cx="920" cy="22" r="3.5" fill="currentColor" />
+        <circle cx="920" cy="68" r="3.5" fill="currentColor" />
+      </svg>
+    </div>
+  )
+}
+
 function Value() {
   return (
-    <section className="border-b border-line" aria-labelledby="value-heading">
-      <Container className="py-16 md:py-20">
-        <h2 id="value-heading" className="max-w-2xl font-serif text-3xl text-ink md:text-4xl">Technology That Solves Real Business Problems</h2>
+    <div aria-labelledby="value-heading">
+      <Container className="relative z-10 pt-16 pb-4 md:pt-20">
+        <p className="text-sm font-medium tracking-[0.16em] text-robes uppercase">From scattered work to one path</p>
+        <h2 id="value-heading" className="mt-3 max-w-2xl font-serif text-3xl text-ink md:text-4xl">Technology That Solves Real Business Problems</h2>
         <p className="mt-4 max-w-2xl text-muted">{site.valueProposition}</p>
         <p className="mt-4">
           <Link to="/services" className={robesLink}>See the services you can hire</Link>
         </p>
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
           {capabilities.map((item) => (
-            <article key={item.title} className="border border-line bg-card p-6">
+            <article key={item.title} className="system-card p-6">
               <h3 className="font-serif text-2xl text-ink">{item.title}</h3>
               <p className="mt-3 text-muted">{item.text}</p>
             </article>
           ))}
         </div>
       </Container>
-    </section>
+    </div>
   )
 }
 
@@ -244,17 +268,7 @@ function Featured() {
       <Container className="py-16 md:py-20">
         <h2 id="featured-heading" className="max-w-2xl font-serif text-3xl text-ink md:text-4xl">Solutions Built Around Real Business Challenges</h2>
         <p className="mt-4 max-w-2xl text-muted">These are portfolio solution concepts. A working demo is shown only where one exists. Records inside the demos are fictional.</p>
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-          <article className="border border-line bg-card p-6 sm:p-8">
-            <p className="text-xs font-medium tracking-[0.16em] text-accent uppercase">Leading solution</p>
-            <h3 className="mt-3 font-serif text-3xl text-ink">ClearRequest</h3>
-            <p className="mt-2 text-sm text-muted">Intelligent workflow and approval management</p>
-            <p className="mt-4 text-muted">A digital platform concept for managing internal requests, multilevel approvals, documentation, an audit trail, and operational reporting.</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link to="/robes/solutions/clearrequest" className={robesAction}>Explore ClearRequest</Link>
-              <Link to="/robes/demo/clearrequest" className={secondaryAction}>Try the live demo</Link>
-            </div>
-          </article>
+        <div className="mt-10">
           <WorkflowShowcase />
         </div>
         <div className="mt-6 grid gap-6 md:grid-cols-2">
@@ -286,7 +300,7 @@ function Audiences() {
   return (
     <section className="border-b border-line" aria-labelledby="audiences-heading">
       <Container className="py-16 md:py-20">
-        <h2 id="audiences-heading" className="font-serif text-3xl text-ink md:text-4xl">Who I Help</h2>
+        <h2 id="audiences-heading" className="font-serif text-3xl text-ink md:text-4xl">Who the work is for</h2>
         <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {site.audiences.map((item) => (
             <li key={item.title} className="border border-line bg-card p-6">
@@ -295,27 +309,6 @@ function Audiences() {
             </li>
           ))}
         </ul>
-      </Container>
-    </section>
-  )
-}
-
-function Expertise() {
-  return (
-    <section className="border-b border-line" aria-labelledby="expertise-home-heading">
-      <Container className="py-16 md:py-20">
-        <h2 id="expertise-home-heading" className="font-serif text-3xl text-ink md:text-4xl">Professional expertise</h2>
-        <p className="mt-4 max-w-2xl text-muted">Grouped by the kind of engineering problem, not by a list of unrelated tools. AI items are capabilities I am prepared to design. They are not claimed client deliveries.</p>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
-          {site.expertise.map((group) => (
-            <article key={group.title} className="border border-line p-6">
-              <h3 className="font-medium text-ink">{group.title}</h3>
-              <ul className="mt-4 space-y-2 text-sm text-muted">
-                {group.items.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-            </article>
-          ))}
-        </div>
       </Container>
     </section>
   )
@@ -339,11 +332,11 @@ function AboutPreview() {
 
 function Demos() {
   return (
-    <section className="border-b border-line" aria-labelledby="demo-heading">
-      <Container className="py-16 md:py-20">
+    <div aria-labelledby="demo-heading">
+      <Container className="relative z-10 pt-8 pb-16 md:pt-10 md:pb-20">
         <DemoReel />
       </Container>
-    </section>
+    </div>
   )
 }
 
@@ -449,14 +442,14 @@ function DemoReel() {
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div className="max-w-2xl">
           <h2 id="demo-heading" className="font-serif text-3xl leading-tight text-ink md:text-4xl">
-            Working demonstrations
+            One application, twelve workflows
           </h2>
           <p className="mt-4 text-muted">
-            Original interfaces with fictional records. Slide through them here. They are not client projects and they do not claim measured results.
+            These are modules of the same demonstration. Open the application and switch workflow to test each one. The records are fictional, and they are not client results.
           </p>
           <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-lg font-semibold">
-            <Link to="/robes/solutions" className="text-robes underline-offset-4 hover:underline">
-              Try a Live Demo →
+            <Link to="/app" className="text-robes underline-offset-4 hover:underline">
+              Open the application →
             </Link>
             <span className="text-muted" aria-hidden="true">|</span>
             <Link to="/robes/contact?intent=similar" className="text-ink underline-offset-4 hover:underline">
@@ -520,7 +513,7 @@ function DemoReel() {
 function DemoCard({ demo, copy = false }: { demo: DemoCard; copy?: boolean }) {
   return (
     <article
-      className="flex w-[86%] shrink-0 snap-start flex-col border border-line bg-card p-6 sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]"
+      className="system-card flex w-[86%] shrink-0 snap-start flex-col p-6 sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]"
       aria-hidden={copy || undefined}
     >
       <h3 className="font-serif text-2xl text-ink">{demo.name}</h3>
@@ -581,7 +574,7 @@ function Close() {
   return (
     <section className="border-t border-line">
       <Container className="py-16 md:py-20">
-        <div className="rounded-3xl border border-[#c9e4d4] bg-[#f3faf6] px-6 py-12 text-ink sm:px-10 dark:border-[#1b7a45]/40 dark:bg-[#123024]">
+        <div className="rounded-3xl border border-line bg-card px-6 py-12 text-ink sm:px-10">
           <h2 className="max-w-2xl font-serif text-4xl leading-tight text-ink">
             {site.ctas.finalTitle}
           </h2>

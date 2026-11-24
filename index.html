@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f3f0e8" />
+    <meta name="theme-color" content="#d7e6ee" />
     <meta
       name="description"
       content="Christopher Agba, an Enterprise Software Engineer and AI Automation Specialist, designs intelligent business applications that simplify workflows and improve operational visibility."
@@ -15,19 +15,12 @@
       href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <title>Christopher Agba · Enterprise Software and AI Automation</title>
+    <title>Robes Leadership &amp; Technology</title>
     <script>
-      ;(function () {
-        try {
-          var stored = localStorage.getItem('theme')
-          var dark =
-            stored === 'dark' ||
-            (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
-          if (dark) document.documentElement.classList.add('dark')
-          var theme = document.querySelector('meta[name="theme-color"]')
-          if (theme) theme.setAttribute('content', dark ? '#08111a' : '#f3f0e8')
-        } catch (e) {}
-      })()
+      try {
+        document.documentElement.classList.remove('dark')
+        localStorage.removeItem('theme')
+      } catch (e) {}
     </script>
   </head>
   <body>

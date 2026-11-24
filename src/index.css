@@ -4,20 +4,20 @@
 
 :root {
   color-scheme: light;
-  --paper: #f3f0e8;
-  --paper-2: #fbfaf6;
-  --ink: #142033;
-  --muted: #3e4e60;
-  --line: rgba(20, 32, 51, 0.14);
+  --paper: #d7e6ee;
+  --paper-2: #e7f2f6;
+  --ink: #102033;
+  --muted: #3d5568;
+  --line: rgba(12, 46, 74, 0.2);
   --accent: #1a4578;
-  --accent-ink: #f8f5ef;
+  --accent-ink: #f4f7f8;
   --brass: #6d522c;
-  --card: rgba(251, 250, 246, 0.92);
+  --card: #c5d9e6;
   --danger: #8d2b2b;
   --band: #0d2138;
-  --band-ink: #f3f0e8;
+  --band-ink: #e7f1f4;
   --band-muted: #c5d0dc;
-  --band-button: #f3f0e8;
+  --band-button: #d7e6ee;
   --band-button-ink: #0d2138;
   /* Adjust these greens to the approved Robes logo once the files are added. */
   --robes: #0e4e2c;
@@ -87,14 +87,13 @@ body {
   text-rendering: optimizeLegibility;
   background-color: var(--paper);
   background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 20rem),
-    radial-gradient(980px 560px at -6% -10%, rgba(26, 69, 120, 0.22), transparent 58%),
-    radial-gradient(760px 480px at 108% 0%, rgba(226, 206, 164, 0.55), transparent 52%),
-    radial-gradient(720px 460px at 74% 112%, rgba(27, 122, 69, 0.2), transparent 54%),
-    radial-gradient(480px 340px at 16% 78%, rgba(176, 204, 188, 0.4), transparent 52%),
+    radial-gradient(980px 560px at -6% -10%, rgba(26, 69, 120, 0.24), transparent 58%),
+    radial-gradient(760px 480px at 108% 0%, rgba(27, 122, 69, 0.2), transparent 54%),
+    radial-gradient(720px 460px at 78% 112%, rgba(12, 30, 51, 0.1), transparent 56%),
+    radial-gradient(480px 340px at 12% 82%, rgba(143, 208, 168, 0.28), transparent 54%),
     var(--grain);
   background-attachment: fixed;
-  background-blend-mode: normal, normal, normal, normal, normal, multiply;
+  background-blend-mode: normal, normal, normal, normal, overlay;
 }
 
 .dark body {
@@ -321,6 +320,65 @@ body {
   }
 }
 
+.system-field {
+  --ink: #f4f7f8;
+  --muted: #c5d4e0;
+  --line: rgba(197, 212, 224, 0.24);
+  --card: rgba(10, 32, 54, 0.72);
+  --robes: #b7e4c4;
+  --color-ink: #f4f7f8;
+  --color-muted: #c5d4e0;
+  --color-line: rgba(197, 212, 224, 0.24);
+  --color-card: rgba(10, 32, 54, 0.72);
+  --color-robes: #b7e4c4;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #f4f7f8;
+  background-color: #0c1e33;
+}
+
+.system-field-mesh {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(720px 420px at 0% 18%, rgba(27, 122, 69, 0.34), transparent 62%),
+    radial-gradient(640px 380px at 100% 0%, rgba(26, 69, 120, 0.55), transparent 58%),
+    radial-gradient(520px 280px at 78% 100%, rgba(27, 122, 69, 0.2), transparent 64%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='98' viewBox='0 0 56 98'%3E%3Cpath d='M28 2 L54 17 V47 L28 62 L2 47 V17 Z M28 50 L54 65 V95 L28 110 L2 95 V65 Z' fill='none' stroke='%239ec4f0' stroke-opacity='0.16' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: auto, auto, auto, 56px 98px;
+}
+
+.system-flow {
+  display: block;
+  width: 100%;
+  height: 4.5rem;
+  margin-top: 1.75rem;
+  color: #8fd0a8;
+  pointer-events: none;
+}
+
+.system-card {
+  border: 1px solid rgba(158, 212, 176, 0.32);
+  background:
+    linear-gradient(180deg, rgba(22, 58, 92, 0.78), rgba(8, 28, 48, 0.92));
+  box-shadow:
+    inset 0 1px 0 rgba(244, 247, 248, 0.08),
+    0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
+.system-field .reel-control {
+  border-color: rgba(183, 228, 196, 0.4);
+  background: rgba(8, 28, 48, 0.72);
+  color: #f4f7f8;
+}
+
+.system-field .reel-control:hover {
+  border-color: #1b7a45;
+}
+
 .demo-reel {
   scrollbar-width: none;
   scroll-behavior: smooth;
@@ -383,8 +441,23 @@ body {
 .demo-app .overflow-x-auto.border,
 .demo-app a.border.bg-card {
   border-radius: 1rem;
-  background: color-mix(in oklab, white 82%, transparent);
-  box-shadow: 0 14px 36px rgba(16, 40, 28, 0.07);
+  border-color: rgba(26, 69, 120, 0.2);
+  background: linear-gradient(180deg, #d7e7f0, #b7cfe0);
+  box-shadow: 0 14px 36px rgba(12, 30, 51, 0.08);
+}
+
+.bg-card {
+  background-image: linear-gradient(180deg, #d7e7f0, #b7cfe0);
+}
+
+.dark .bg-card {
+  background-image: none;
+}
+
+.blend-panel {
+  border: 1px solid rgba(26, 69, 120, 0.18);
+  background: linear-gradient(180deg, #d7e7f0, #b7cfe0);
+  box-shadow: 0 16px 36px rgba(12, 30, 51, 0.1);
 }
 
 .dark .demo-app .border.bg-card,

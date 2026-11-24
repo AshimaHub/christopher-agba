@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { operationsAppEntry } from './content/operationsApp.ts'
 import { Layout } from './components/Layout.tsx'
 import { HomePage } from './pages/HomePage.tsx'
 import { NotFoundPage } from './pages/NotFoundPage.tsx'
@@ -58,6 +59,7 @@ export default function App() {
         <Route path="robes/demo/hirehours/*" element={<Load><HireHoursDemo /></Load>} />
         <Route path="robes/demo/siteledger/*" element={<Load><SiteLedgerDemo /></Load>} />
         <Route path="robes/demo/spendgate/*" element={<Load><SpendGateDemo /></Load>} />
+        <Route path="app" element={<Navigate to={operationsAppEntry} replace />} />
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="solutions" element={<Load><SolutionsPage /></Load>} />
