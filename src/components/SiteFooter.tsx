@@ -33,7 +33,6 @@ export function SiteFooter() {
           <RobesLogo surface="dark" className="h-16 w-auto max-w-[5rem] object-contain object-left" />
           <p className="mt-4 font-medium text-band-ink">{robes.name}</p>
           <p className="mt-2 max-w-sm text-sm leading-relaxed text-band-muted">{robes.proposition}</p>
-          <p className="mt-3 max-w-sm text-sm leading-relaxed text-band-muted">{robes.status}</p>
           <ul className="mt-4 space-y-2">
             {robes.navigation
               .filter((item) => item.label !== 'Contact')

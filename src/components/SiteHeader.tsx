@@ -13,7 +13,7 @@ export function SiteHeader() {
   const business = onHome || inRobes
   const links = navigation
   const cta = onHome
-    ? { to: '/app', label: 'Open the application', className: robesLook }
+    ? { to: '/#demo-heading', label: 'Try out a Demo', className: robesLook }
     : inRobes
       ? { to: '/robes/contact', label: 'Request a Consultation', className: robesLook }
       : { to: '/contact', label: 'Discuss Your Project', className: primaryLook }

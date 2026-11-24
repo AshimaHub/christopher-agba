@@ -186,11 +186,10 @@ function Hero() {
           {robes.proposition}
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
-          {robes.mission} Open the application and try every workflow: requests, stores, plant, fleet, fuel, repairs, and supplier bills. The records are fictional.
+          {robes.mission} Try a demo of each workflow: requests, stores, plant, fleet, fuel, repairs, and supplier bills. The records are fictional.
         </p>
-        <p className="mt-4 max-w-3xl text-sm text-muted">{robes.status}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Link to="/app" className={robesAction}>Open the application</Link>
+          <Link to="/#demo-heading" className={robesAction}>Try out a Demo</Link>
           <Link to="/robes/contact" className={secondaryAction}>Request a Consultation</Link>
         </div>
       </Container>
@@ -270,26 +269,6 @@ function Featured() {
         <p className="mt-4 max-w-2xl text-muted">These are portfolio solution concepts. A working demo is shown only where one exists. Records inside the demos are fictional.</p>
         <div className="mt-10">
           <WorkflowShowcase />
-        </div>
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
-          <article className="border border-line bg-card p-6">
-            <h3 className="font-serif text-2xl text-ink">Operations Hub</h3>
-            <p className="mt-2 text-sm text-muted">Inventory and operational management</p>
-            <p className="mt-4 text-muted">An enterprise software concept for stock visibility, requisitions, dispatch coordination, and multi-site operations. Related working demos use fictional businesses.</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link to="/robes/demo/siteledger" className={robesAction}>Try the stock demo</Link>
-              <Link to="/robes/solutions/operations-hub" className={secondaryAction}>Explore Operations Hub</Link>
-            </div>
-          </article>
-          <article className="border border-line bg-card p-6">
-            <h3 className="font-serif text-2xl text-ink">KnowledgeDesk AI</h3>
-            <p className="mt-2 text-sm text-muted">Enterprise knowledge assistant</p>
-            <p className="mt-4 text-muted">A concept for source-grounded answers from organizational documents. There is no live assistant on this site yet.</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link to="/robes/solutions/knowledgedesk" className={secondaryAction}>Read the concept</Link>
-              <Link to="/contact?service=custom-business-software" className={secondaryAction}>Request a Consultation</Link>
-            </div>
-          </article>
         </div>
       </Container>
     </section>
@@ -441,17 +420,13 @@ function DemoReel() {
     >
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div className="max-w-2xl">
-          <h2 id="demo-heading" className="font-serif text-3xl leading-tight text-ink md:text-4xl">
+          <h2 id="demo-heading" className="scroll-mt-28 font-serif text-3xl leading-tight text-ink md:text-4xl">
             One application, twelve workflows
           </h2>
           <p className="mt-4 text-muted">
-            These are modules of the same demonstration. Open the application and switch workflow to test each one. The records are fictional, and they are not client results.
+            Choose a workflow and try the demo. The records are fictional, and they are not client results.
           </p>
-          <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-lg font-semibold">
-            <Link to="/app" className="text-robes underline-offset-4 hover:underline">
-              Open the application →
-            </Link>
-            <span className="text-muted" aria-hidden="true">|</span>
+          <p className="mt-6 text-lg font-semibold">
             <Link to="/robes/contact?intent=similar" className="text-ink underline-offset-4 hover:underline">
               Request a Consultation →
             </Link>
